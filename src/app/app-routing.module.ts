@@ -26,7 +26,11 @@ const routes: Routes = [
   {
     path: 'welcome',
     loadChildren: () => import('./pages/welcome/welcome.module').then( m => m.WelcomePageModule)
+  },  {
+    path: 'entry-form',
+    loadChildren: () => import('./pages/entry-form/entry-form.module').then( m => m.EntryFormPageModule)
   }
+
 
 
 ];
