@@ -1,13 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>welcome</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">welcome</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="background-general-image">
+  <div>
+    <img src="/assets/images/Logo.png" class="logoHot" />
+  </div>
+  <ion-card class="card-contend">
+    <h1 class="labelBold welcomeLabel">Bienvenid@ A Hot Workers & Hotels
+    </h1>
+    <ion-button
+      shape="round"
+      expand="block"
+      color="danger"
+      [routerLink]="['/login']"
+      >Ingresa aqui</ion-button
+    >
+  </ion-card>
 </ion-content>
