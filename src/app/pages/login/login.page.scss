@@ -1,0 +1,19 @@
+ion-content {
+    --background: none;
+    background-image: url("../../../assets/images/people-1.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .contend-terms {
+        padding: 1rem;
+        width: 90%;
+        margin-top: 32vh;
+        margin-left: 2vh;
+        margin-right: 2vh;
+        background: rgb(66 54 54 / 71%) 0% 0% no-repeat padding-box;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8901960784);
+        border-radius: 8px;
+        color: rgb(252 252 252);
+        text-align: center;
+    }
+}
