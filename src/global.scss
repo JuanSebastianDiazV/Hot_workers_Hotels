@@ -9,6 +9,17 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+
+.labelBold{
+    font-weight: bold;
+}
+
+.logoHot{
+    width: 60%;
+    margin: auto 20%;
+    margin-top: 10vh;
+}
+
 .propertyFunds {
     --background: none;
     background-position: center center;
@@ -29,7 +40,6 @@
 .card-contend {
     padding: 1rem;
     width: 90%;
-    margin-top: 32vh;
     margin-left: 2vh;
     margin-right: 2vh;
     background: rgb(66 54 54 / 71%) 0% 0% no-repeat padding-box;

@@ -1,28 +1,50 @@
 <ion-content [fullscreen]="true" class="background-general-image">
+  <div>
+    <img src="/assets/images/Logo.png" class="logoHot" />
+  </div>
   <ion-card class="card-contend">
     <form [formGroup]="form" class="form-home">
       <ion-row>
         <ion-col size="12">
-          <h1>Verificación De Edad</h1>
-          <span> Esta app contiene material restringido a menores de edad, que incluye desnudez y representaciones
-            explícitas
-            de actividad sexual. Al entrar, afirma que tiene por lo menos 18 años de edad o la mayoría de edad en la
-            jurisdicción desde que está accediendo a la app y que da consentimiento en ver contenido sexualmente
-            explícito.</span>
+          <h1 class="labelBold">Verificación De Edad</h1>
+          <span>
+            Esta app contiene material restringido a menores de edad, que
+            incluye desnudez y representaciones explícitas de actividad sexual.
+            Al entrar, afirma que tiene por lo menos 18 años de edad o la
+            mayoría de edad en la jurisdicción desde que está accediendo a la
+            app y que da consentimiento en ver contenido sexualmente
+            explícito.</span
+          >
           <div>
             <ion-col size="2">
-              <ion-checkbox labelPlacement="end"  formControlName="terms"></ion-checkbox>
+              <ion-checkbox
+                labelPlacement="end"
+                formControlName="terms"
+              ></ion-checkbox>
             </ion-col>
             <ion-col size="10">
-              <a (click)="openModal()">Acepto los términos y condiciones de uso</a>
+              <a (click)="openModal()"
+                >Acepto los términos y condiciones de uso</a
+              >
             </ion-col>
           </div>
         </ion-col>
         <ion-col size="12">
-          <ion-button (click)="navigateFolder()" expand="block" shape="round" color="danger" [disabled]="!form.get('terms')?.value">
+          <ion-button
+            (click)="navigateFolder()"
+            expand="block"
+            shape="round"
+            color="danger"
+            [disabled]="!form.get('terms')?.value"
+          >
             Tengo 18 años o más
           </ion-button>
-          <ion-button class="ion-margin-top" expand="block" shape="round" color="light">
+          <ion-button
+            class="ion-margin-top"
+            expand="block"
+            shape="round"
+            color="light"
+          >
             Soy menor de 18 años
           </ion-button>
         </ion-col>
@@ -30,7 +52,3 @@
     </form>
   </ion-card>
 </ion-content>
-
-
-
-

@@ -1,7 +1,24 @@
 <ion-content [fullscreen]="true" class="background-general-image">
+  <div>
+    <img src="/assets/images/Logo.png" class="logoHot" />
+  </div>
   <ion-card class="card-contend">
-    <p>Seleccione tipo de usuario</p>
-    <ion-button expand="block" [routerLink]="['/folder']">Worker</ion-button>
-    <ion-button expand="block">Hotel</ion-button>
+    <div class="ion-margin-bottom">
+      <h1 class="labelBold">Tipo de usuario</h1>
+    </div>
+    <ion-button
+      shape="round"
+      expand="block"
+      color="danger"
+      [routerLink]="['/folder']"
+      >Worker</ion-button
+    >
+    <ion-button
+      shape="round"
+      expand="block"
+      color="danger"
+      class="ion-margin-top"
+      >Hotel</ion-button
+    >
   </ion-card>
 </ion-content>
