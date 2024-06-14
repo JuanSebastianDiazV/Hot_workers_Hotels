@@ -18,8 +18,11 @@ const routes: Routes = [
   {
     path: 'modal-terms',
     loadChildren: () => import('./pages/modal-terms/modal-terms.module').then( m => m.ModalTermsPageModule)
+  },
+  {
+    path: 'landing',
+    loadChildren: () => import('./pages/landing/landing.module').then( m => m.LandingPageModule)
   }
-
 
 ];
  

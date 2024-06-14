@@ -60,7 +60,7 @@ export class LoginPage implements OnInit {
   }
 
   navigateFolder() {
-    this.router.navigate(['/folder']);
+    this.router.navigate(['/landing']);
   }
 
   // exitApp() {

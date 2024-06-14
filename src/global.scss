@@ -1,26 +1,40 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
- */
-
-/* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
-
-/* Basic CSS for apps built with Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
-
-/* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+.propertyFunds {
+    --background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.background-general-image {
+    @extend .propertyFunds;
+    background-image: url("assets/images/fondoExterior.png");
+}
+
+.background-general-interior {
+    @extend .propertyFunds;
+    background-image: url("assets/images/GeneralFondoApp.png");
+}
+
+.card-contend {
+    padding: 1rem;
+    width: 90%;
+    margin-top: 32vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
+    background: rgb(66 54 54 / 71%) 0% 0% no-repeat padding-box;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.8901960784);
+    border-radius: 8px;
+    color: rgb(252 252 252);
+    text-align: center;
+}
