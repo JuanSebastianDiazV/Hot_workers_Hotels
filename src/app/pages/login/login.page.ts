@@ -27,11 +27,6 @@ export class LoginPage implements OnInit {
     this.initForm();
     this.menuCtrl.enable(false);
   }
-
-  ngOnDestroy() {
-    this.menuCtrl.enable(true);
-  }
-
     
   initForm(){
     this.form = this.fb.group({
