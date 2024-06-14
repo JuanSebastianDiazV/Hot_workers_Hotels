@@ -5,3 +5,10 @@
     font-weight: bold;
     padding: 0.5rem 2rem;
 }
+
+.button-transparent {
+    --background: transparent !important;
+    --box-shadow: none;
+    color: rgb(0, 0, 255);
+    font-size: 0.75rem;
+}
