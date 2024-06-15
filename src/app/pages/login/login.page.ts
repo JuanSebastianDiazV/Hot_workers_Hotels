@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalTermsPage,
       breakpoints: [0, 0.3, 0.5, 0.8],
-      initialBreakpoint: 0.8,
+      initialBreakpoint: 0.55,
       componentProps: {
         aceptTerms: false,
       },
