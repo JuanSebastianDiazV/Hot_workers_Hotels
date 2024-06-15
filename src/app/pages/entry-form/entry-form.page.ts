@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, ModalController } from '@ionic/angular';
+import { MenuController, AlertController } from '@ionic/angular';
 import { ButtonDataService } from '../../services/button-data/button-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -10,18 +10,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EntryFormPage implements OnInit {
   loginForm!: FormGroup;
+  recuperarUsuarioForm!: FormGroup;
   showLoginForm: boolean = true;
 
   constructor(
     private menuCtrl: MenuController,
-    private modalCtrl: ModalController,
+    private alertController: AlertController,
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      resetUser: [''],
+    });
+
+    this.recuperarUsuarioForm = this.formBuilder.group({
+      resetUser: ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -38,6 +42,7 @@ export class EntryFormPage implements OnInit {
       console.log(this.loginForm.value);
     }
   }
+
   onRecuperarUsuarioClick() {
     this.showLoginForm = false;
     this.loginForm.get('username')?.clearValidators();
@@ -47,19 +52,37 @@ export class EntryFormPage implements OnInit {
   }
 
   onCancelarRecuperacionClick() {
-    this.showLoginForm = true; 
-    this.loginForm.get('username')?.setValidators(Validators.required);
-    this.loginForm.get('username')?.updateValueAndValidity();
-    this.loginForm.get('password')?.setValidators(Validators.required);
-    this.loginForm.get('password')?.updateValueAndValidity();
-    this.loginForm.reset();
+    this.showLoginForm = true;
+    this.resetLoginForm();
+    this.recuperarUsuarioForm.reset();
   }
 
-  onSubmitRecuperacion() {
+  async onSubmitRecuperacion() {
+    if (this.recuperarUsuarioForm.valid) {
+      console.log(this.recuperarUsuarioForm.value);
+
+      // Muestra la alerta utilizando Ionic
+      const alert = await this.alertController.create({
+        header: 'Solicitud enviada',
+        message: 'A tu correo registrado hemos enviado tu usuario.',
+        buttons: ['Cerrar']
+      });
+
+      await alert.present();
+      
+      // Restablece el formulario y muestra el formulario de inicio de sesión nuevamente
+      await alert.onDidDismiss();
+      this.showLoginForm = true;
+      this.resetLoginForm();
+      this.recuperarUsuarioForm.reset();
+    }
+  }
+
+  private resetLoginForm() {
+    this.loginForm.reset();
     this.loginForm.get('username')?.setValidators(Validators.required);
     this.loginForm.get('username')?.updateValueAndValidity();
     this.loginForm.get('password')?.setValidators(Validators.required);
     this.loginForm.get('password')?.updateValueAndValidity();
-    this.loginForm.reset();
   }
 }
