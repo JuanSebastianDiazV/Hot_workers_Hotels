@@ -4,23 +4,49 @@
     <h1 class="labelBold tittleUser">{{ getClickedButton() }}</h1>
   </div>
   <ion-card class="card-contend">
-    <form *ngIf="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="showLoginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <ion-item>
         <ion-label position="floating">Usuario</ion-label>
-        <ion-input formControlName="username" type="text"></ion-input>
+        <ion-input formControlName="username" type="text"
+          [required]="loginForm.get('username')?.errors?.['required']"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Contraseña</ion-label>
-        <ion-input formControlName="password" type="password"></ion-input>
+        <ion-input formControlName="password" type="password"
+          [required]="loginForm.get('password')?.errors?.['required']"></ion-input>
       </ion-item>
       <div class="session-buttons">
         <ion-button expand="block" type="submit" color="danger" class="ion-margin-bottom"
           [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
-        <ion-button expand="block" type="submit" color="danger">Registrarme</ion-button>
+        <ion-button expand="block" type="submit" color="primary">Registrarme</ion-button>
       </div>
       <div class="ion-margin-top">
-        <ion-button expand="block" type="submit" class="button-transparent">Recuperar Contraseña</ion-button>
-        <ion-button expand="block" type="submit" class="button-transparent">Recuperar usuario</ion-button>
+        <ion-button expand="block" type="button" class="button-transparent">Recuperar Contraseña</ion-button>
+        <ion-button expand="block" type="button" class="button-transparent"
+          (click)="onRecuperarUsuarioClick()">Recuperar usuario</ion-button>
+      </div>
+    </form>
+
+    <!-- Formulario de recuperación de usuario -->
+    <form *ngIf="!showLoginForm" [formGroup]="loginForm" (ngSubmit)="onSubmitRecuperacion()">
+      <div>
+        <h1>Recuperación de usuario</h1>
+        <p>
+          Estimado usuario, por favor ingresa el correo que tienes registrado
+          para poder enviarte tu usuario
+        </p>
+        <ion-item>
+          <ion-label position="floating">Correo registrado</ion-label>
+          <ion-input formControlName="resetUser" type="email"
+            [required]="loginForm.get('resetUser')?.errors?.['required']"></ion-input>
+        </ion-item>
+      </div>
+      <div class="session-buttons">
+
+        <ion-button expand="block" type="submit" color="danger">Enviar
+          solicitud</ion-button>
+        <ion-button expand="block" type="button" color="medium" class="ion-margin-top"
+          (click)="onCancelarRecuperacionClick()">Cancelar</ion-button>
       </div>
     </form>
   </ion-card>

@@ -10,23 +10,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class EntryFormPage implements OnInit {
   loginForm!: FormGroup;
+  showLoginForm: boolean = true;
+
   constructor(
     private menuCtrl: MenuController,
     private modalCtrl: ModalController,
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder
-  ) {}
-
-  ngOnInit() {
-    this.menuCtrl.enable(false);
-    this.formEntryForm();
-  }
-
-  formEntryForm() {
+  ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      resetUser: [''],
     });
+  }
+
+  ngOnInit() {
+    this.menuCtrl.enable(false);
   }
 
   getClickedButton() {
@@ -37,5 +37,29 @@ export class EntryFormPage implements OnInit {
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
     }
+  }
+  onRecuperarUsuarioClick() {
+    this.showLoginForm = false;
+    this.loginForm.get('username')?.clearValidators();
+    this.loginForm.get('username')?.updateValueAndValidity();
+    this.loginForm.get('password')?.clearValidators();
+    this.loginForm.get('password')?.updateValueAndValidity();
+  }
+
+  onCancelarRecuperacionClick() {
+    this.showLoginForm = true; 
+    this.loginForm.get('username')?.setValidators(Validators.required);
+    this.loginForm.get('username')?.updateValueAndValidity();
+    this.loginForm.get('password')?.setValidators(Validators.required);
+    this.loginForm.get('password')?.updateValueAndValidity();
+    this.loginForm.reset();
+  }
+
+  onSubmitRecuperacion() {
+    this.loginForm.get('username')?.setValidators(Validators.required);
+    this.loginForm.get('username')?.updateValueAndValidity();
+    this.loginForm.get('password')?.setValidators(Validators.required);
+    this.loginForm.get('password')?.updateValueAndValidity();
+    this.loginForm.reset();
   }
 }
