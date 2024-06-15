@@ -9,12 +9,11 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-
-.labelBold{
+.labelBold {
     font-weight: bold;
 }
 
-.logoHot{
+.logoHot {
     width: 60%;
     margin: auto 20%;
     margin-top: 10vh;
@@ -47,4 +46,32 @@
     border-radius: 8px;
     color: rgb(252 252 252);
     text-align: center;
+}
+
+/* Estilos globales para las alertas de Ionic */
+
+/* Estilos globales para las alertas de Ionic */
+.custom-alert {
+    --background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+    --border-radius: 15px; /* Bordes redondeados */
+    --width: 90%; /* Ancho del alert */
+    --max-width: 500px; /* Ancho máximo del alert */
+    --height: auto; /* Altura automática */
+    --max-height: 80%; /* Altura máxima del alert */
+    --header-color: #e91e63; /* Color del header */
+    --message-color: #333; /* Color del mensaje */
+}
+
+.custom-alert .alert-message {
+    font-size: 1.2rem; /* Tamaño de la fuente del mensaje */
+}
+
+.custom-alert .alert-button {
+    --background: #e91e63; /* Fondo del botón */
+    --color: #ffffff; /* Color del texto del botón */
+    --border-radius: 8px; /* Bordes redondeados del botón */
+    --padding: 10px 20px; /* Padding del botón */
+    --font-size: 1rem; /* Tamaño de la fuente del botón */
+    --font-weight: bold; /* Peso de la fuente del botón */
+    text-transform: uppercase; /* Transformar texto a mayúsculas */
 }
