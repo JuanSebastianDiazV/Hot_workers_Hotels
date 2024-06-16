@@ -29,6 +29,10 @@ const routes: Routes = [
   },  {
     path: 'entry-form',
     loadChildren: () => import('./pages/entry-form/entry-form.module').then( m => m.EntryFormPageModule)
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   }
 
 
