@@ -50,7 +50,7 @@
 
 /* Estilos globales para las alertas de Ionic */
 
-.sweetAlert1 .alert-wrapper {
+.warningAlert .alert-wrapper {
     --background: rgba(59, 22, 22, 0.8);
     --border-radius: 15px;
     --width: 90%; 
@@ -67,7 +67,7 @@
     .alert-input-group.sc-ion-alert-md {
         color: #fff;
     }
-    .sweetAlert1 .alert-message {
+    .warningAlert .alert-message {
         color: #ffffff;
     }
     .btn-Cerrar {

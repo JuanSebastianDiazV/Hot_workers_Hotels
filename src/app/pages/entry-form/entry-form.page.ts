@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, AlertController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
+import { AlertService } from '../../services/alerts/alerts.service';
 import { ButtonDataService } from '../../services/button-data/button-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +16,7 @@ export class EntryFormPage implements OnInit {
 
   constructor(
     private menuCtrl: MenuController,
-    private alertController: AlertController,
+    private alertService: AlertService,
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder
   ) {
@@ -61,31 +62,20 @@ export class EntryFormPage implements OnInit {
     if (this.recuperarUsuarioForm.valid) {
       console.log(this.recuperarUsuarioForm.value);
 
-      // Muestra la alerta utilizando Ionic
-      const alert = await this.alertController.create({
-        header: '¡Solicitud enviada!',
-        message: 'Estimado usuario a tu correo registrado hemos enviado tu usuario.',
-        cssClass: 'sweetAlert1',
-        buttons: [
-          {
-            text: 'Cerrar',
-            cssClass: 'btn-Cerrar',
-            handler: () => {
-              this.showLoginForm = true;
-              this.resetLoginForm();
-              this.recuperarUsuarioForm.reset();
-            },
-          },
-        ],
-      });
-
-      await alert.present();
-
-      // Restablece el formulario y muestra el formulario de inicio de sesión nuevamente
-      await alert.onDidDismiss();
-      this.showLoginForm = true;
-      this.resetLoginForm();
-      this.recuperarUsuarioForm.reset();
+      this.alertService.presentWarningAlert(
+        '¡Solicitud enviada!',
+        'Estimado usuario, a tu correo registrado hemos enviado tu usuario.',
+        () => {
+          this.showLoginForm = true;
+          this.resetLoginForm();
+          this.recuperarUsuarioForm.reset();
+        }
+      );
+    } else {
+      this.alertService.presentErrorAlert(
+        'Advertencia',
+        'Por favor, ingrese un correo válido.'
+      );
     }
   }
 
