@@ -50,28 +50,39 @@
 
 /* Estilos globales para las alertas de Ionic */
 
-/* Estilos globales para las alertas de Ionic */
-.custom-alert {
-    --background: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
-    --border-radius: 15px; /* Bordes redondeados */
-    --width: 90%; /* Ancho del alert */
-    --max-width: 500px; /* Ancho máximo del alert */
-    --height: auto; /* Altura automática */
-    --max-height: 80%; /* Altura máxima del alert */
-    --header-color: #e91e63; /* Color del header */
-    --message-color: #333; /* Color del mensaje */
-}
-
-.custom-alert .alert-message {
-    font-size: 1.2rem; /* Tamaño de la fuente del mensaje */
-}
-
-.custom-alert .alert-button {
-    --background: #e91e63; /* Fondo del botón */
-    --color: #ffffff; /* Color del texto del botón */
-    --border-radius: 8px; /* Bordes redondeados del botón */
-    --padding: 10px 20px; /* Padding del botón */
-    --font-size: 1rem; /* Tamaño de la fuente del botón */
-    --font-weight: bold; /* Peso de la fuente del botón */
-    text-transform: uppercase; /* Transformar texto a mayúsculas */
+.sweetAlert1 .alert-wrapper {
+    --background: rgba(59, 22, 22, 0.8);
+    --border-radius: 15px;
+    --width: 90%; 
+    --max-width: 500px; 
+    text-align: center;
+    color: white; 
+    padding: 20px;
+    .alert-title.sc-ion-alert-md {
+        color: #fff;
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    .alert-message.sc-ion-alert-md,
+    .alert-input-group.sc-ion-alert-md {
+        color: #fff;
+    }
+    .sweetAlert1 .alert-message {
+        color: #ffffff;
+    }
+    .btn-Cerrar {
+        width: 100%;
+        padding: 0.2rem 1rem;
+        font-size: 1rem;
+        margin: auto;
+        background: var(--ion-color-danger);
+        color: #fff !important;
+        border-radius: 24px;
+        height: auto;
+        margin-top: 1rem;
+        text-transform: uppercase;
+        .alert-button-inner.sc-ion-alert-md {
+            justify-content: center;
+        }
+    }
 }

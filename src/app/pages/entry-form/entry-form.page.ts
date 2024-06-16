@@ -63,14 +63,13 @@ export class EntryFormPage implements OnInit {
 
       // Muestra la alerta utilizando Ionic
       const alert = await this.alertController.create({
-        header: 'Solicitud enviada',
-        message:
-          '<ion-icon name="checkmark-circle" style="font-size: 2rem; color: green;"></ion-icon> A tu correo registrado hemos enviado tu usuario.',
-        cssClass: 'custom-alert', // Clase CSS personalizada
+        header: '¡Solicitud enviada!',
+        message: 'Estimado usuario a tu correo registrado hemos enviado tu usuario.',
+        cssClass: 'sweetAlert1',
         buttons: [
           {
-            text: 'OK',
-            cssClass: 'alert-button', // Clase CSS para el botón
+            text: 'Cerrar',
+            cssClass: 'btn-Cerrar',
             handler: () => {
               this.showLoginForm = true;
               this.resetLoginForm();
