@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-reset-password',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reset-password.page.scss'],
 })
 export class ResetPasswordPage implements OnInit {
-
-  constructor() { }
+  emailForm!: FormGroup;
+  constructor(private formBuilder: FormBuilder) { 
+    this.emailForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
 
   ngOnInit() {
   }
