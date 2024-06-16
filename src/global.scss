@@ -121,7 +121,6 @@
     @extend .propertyAlerts;
     --background: rgb(10 10 10 / 80%);
 
-
     .alert-title.sc-ion-alert-md {
         color: #fff;
         font-size: 1.8rem;
@@ -138,4 +137,20 @@
         @extend .propertyButtonClose;
         background: var(--ion-color-medium);
     }
+}
+
+//Back-icon
+
+.custom-back-container {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.custom-back-icon {
+    width: 35px;
+    height: auto;
 }
