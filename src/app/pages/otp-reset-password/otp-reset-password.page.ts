@@ -43,7 +43,7 @@ export class OtpResetPasswordPage {
   continue() {
     if (this.otp.length === 6) {
       // Navegar a una nueva ruta
-      this.router.navigate(['/new-route']);
+      this.router.navigate(['/new-password']);
     } else {
       // Mostrar mensaje de error o alert
       this.alertService.presentErrorAlert(
