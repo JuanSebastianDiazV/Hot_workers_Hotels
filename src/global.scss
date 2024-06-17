@@ -97,7 +97,7 @@
 
 .errorAlert .alert-wrapper {
     @extend .propertyAlerts;
-    --background: rgba(59, 22, 22, 0.8);
+    --background: rgb(59 22 22 / 97%);
 
     .alert-title.sc-ion-alert-md {
         color: #fff;
