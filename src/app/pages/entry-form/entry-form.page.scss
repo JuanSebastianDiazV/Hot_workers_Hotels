@@ -1,4 +1,6 @@
 @import "../../../theme/buttons.scss";
+@import "../../../theme/forms.scss";
+
 .tittleUser {
     text-align: center;
     color: #fff;
@@ -10,16 +12,4 @@
 }
 .session-buttons{
     margin-top: 3.5rem;
-}
-
-ion-item{
-    --background: transparent !important;
-    --border-color: #fff;
-    font-size: 1.1rem;
-    ion-label{
-        color: #fff;
-    }
-    ion-input{
-        color: #f1a7a7;
-    }
 }
