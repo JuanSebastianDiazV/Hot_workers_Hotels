@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-terms',
@@ -10,17 +11,17 @@ export class ModalTermsPage implements OnInit {
   @Input() aceptTerms: any;
 
   constructor(
-    private modalCtrl: ModalController
-
-  ) { }
+    private modalCtrl: ModalController,
+    private menuCtrl: MenuController
+  ) {}
 
   ngOnInit() {
+    this.menuCtrl.enable(false);
   }
 
-  salir(){
+  salir() {
     this.modalCtrl.dismiss({
       aceptTerms: true,
-    })
+    });
   }
-
 }

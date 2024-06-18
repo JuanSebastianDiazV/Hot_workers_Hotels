@@ -25,12 +25,12 @@
       </ion-text>
 
       <div class="session-buttons">
-        <ion-button expand="block" type="submit" color="danger" class="ion-margin-bottom" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
-        <ion-button expand="block" type="button" color="primary">Registrarme</ion-button>
+        <ion-button shape="round" expand="block" type="submit" color="danger" class="ion-margin-bottom" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
+        <ion-button shape="round" expand="block" type="button" color="primary">Registrarme</ion-button>
       </div>
       <div class="ion-margin-top">
-        <ion-button expand="block" type="button" class="button-transparent" [routerLink]="['/reset-password']">Recuperar Contraseña</ion-button>
-        <ion-button expand="block" type="button" class="button-transparent" (click)="onRecuperarUsuarioClick()">Recuperar usuario</ion-button>
+        <ion-button shape="round" expand="block" type="button" class="button-transparent" [routerLink]="['/reset-password']">Recuperar Contraseña</ion-button>
+        <ion-button shape="round" expand="block" type="button" class="button-transparent" (click)="onRecuperarUsuarioClick()">Recuperar usuario</ion-button>
       </div>
     </form>
 
@@ -49,8 +49,8 @@
         </ion-text>
       </div>
       <div class="session-buttons">
-        <ion-button expand="block" type="submit" color="danger" [disabled]="!recuperarUsuarioForm.valid">Enviar solicitud</ion-button>
-        <ion-button expand="block" type="button" color="medium" class="ion-margin-top" (click)="onCancelarRecuperacionClick()">Cancelar</ion-button>
+        <ion-button shape="round" expand="block" type="submit" color="danger" [disabled]="!recuperarUsuarioForm.valid">Enviar solicitud</ion-button>
+        <ion-button shape="round" expand="block" type="button" color="medium" class="ion-margin-top" (click)="onCancelarRecuperacionClick()">Cancelar</ion-button>
       </div>
     </form>
   </ion-card>

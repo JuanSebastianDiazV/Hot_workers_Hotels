@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,19 +10,21 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordPage implements OnInit {
   emailForm!: FormGroup;
-  constructor(private formBuilder: FormBuilder,
-    private router: Router
-  ) { 
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private menuCtrl: MenuController
+  ) {
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
     });
   }
 
   ngOnInit() {
+    this.menuCtrl.enable(false);
   }
 
-  onSubmit(){
+  onSubmit() {
     this.router.navigate(['/otp-reset-password']);
   }
-
 }
