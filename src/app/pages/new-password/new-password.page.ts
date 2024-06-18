@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AlertService } from '../../services/alerts/alerts.service';
 
 @Component({
   selector: 'app-new-password',
@@ -14,7 +15,8 @@ export class NewPasswordPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private alertService: AlertService
   ) {
     this.passwordForm = this.fb.group(
       {
@@ -39,7 +41,7 @@ export class NewPasswordPage implements OnInit {
     );
   }
 
-  ngOnInit(){
+  ngOnInit() {
     this.menuCtrl.enable(false);
   }
 
@@ -51,10 +53,15 @@ export class NewPasswordPage implements OnInit {
 
   onSubmit() {
     if (this.passwordForm.valid) {
-      // Lógica para manejar la contraseña guardada
+      this.alertService.presentSuccessAlert(
+        '¡Contraseña restablecida!',
+        'Tu contraseña ha sido restablecida con éxito, por favor inica sesión',
+        () => {
+          this.router.navigate(['/entry-form']);
+        }
+      );
       console.log('Contraseña guardada:', this.passwordForm.value.password);
       // Navegar a una nueva ruta
-      this.router.navigate(['/new-route']);
     }
   }
 }
