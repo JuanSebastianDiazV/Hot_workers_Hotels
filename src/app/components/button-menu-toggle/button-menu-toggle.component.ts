@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToggleStateService } from '../../services/toggle-state/toggle-state.service';
 
 @Component({
   selector: 'app-button-menu-toggle',
@@ -6,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./button-menu-toggle.component.scss'],
 })
 export class ButtonMenuToggleComponent implements OnInit {
-  isOnline: boolean = true; // Inicialmente en línea
-  constructor() {}
+  isOnline: boolean = true;
+  constructor(private toggleStateService: ToggleStateService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isOnline = this.toggleStateService.isOnline;
+  }
+
   toggleStatus(event: any) {
     this.isOnline = event.detail.checked;
+    this.toggleStateService.isOnline = this.isOnline;
   }
 }
