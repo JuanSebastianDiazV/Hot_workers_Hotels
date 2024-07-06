@@ -33,6 +33,7 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuCtrl.enable(false);
     this.email = this.userDataService.getEmail(); // Obtén el correo del usuario
+    console.log('Email obtenido:', this.email); // Añadir un log para verificar
     // No iniciar el temporizador aquí
   }
 
@@ -82,9 +83,16 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
     }
   }
 
+  clearOtpFields() {
+    this.otp = '';
+    this.otpArray = new Array(6).fill('');
+  }
+
   requestNewCode() {
     this.isRequestingCode = true; // Deshabilitar el botón inmediatamente
     this.buttonText = 'Código Solicitado'; // Actualizar el texto del botón
+
+    this.clearOtpFields(); // Restablecer OTP y OTP array
 
     const payload = { email: this.email }; // Crear el payload con el correo del usuario
 
@@ -98,6 +106,7 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
         this.buttonText = 'Solicitar Código';
         console.error('Error al solicitar el código', error);
         this.alertService.presentErrorAlert('Error', 'No se pudo solicitar el código. Por favor, intenta nuevamente.');
+        this.clearOtpFields(); // Restablecer OTP y OTP array si hay error
       });
   }
 
@@ -112,6 +121,7 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
           'Error',
           'El código ingresado es incorrecto.'
         );
+        this.clearOtpFields(); // Restablecer OTP y OTP array si el código es incorrecto
       }
     } else {
       // Mostrar mensaje de error si el código no tiene 6 dígitos
@@ -119,6 +129,7 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
         'Advertencia',
         'Por favor, ingresa un código de 6 dígitos.'
       );
+      this.clearOtpFields(); // Restablecer OTP y OTP array si el código no tiene 6 dígitos
     }
   }
 }
