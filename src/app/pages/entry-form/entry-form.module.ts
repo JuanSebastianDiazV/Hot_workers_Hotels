@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { EntryFormPageRoutingModule } from './entry-form-routing.module';
 import { EntryFormPage } from './entry-form.page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
+    HttpClientModule,
     EntryFormPageRoutingModule
   ],
   declarations: [EntryFormPage]

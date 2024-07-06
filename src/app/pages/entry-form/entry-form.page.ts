@@ -1,8 +1,10 @@
+// src/app/pages/entry-form/entry-form.page.ts
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, LoadingController } from '@ionic/angular';
 import { AlertService } from '../../services/alerts/alerts.service';
 import { ButtonDataService } from '../../services/button-data/button-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from '../../services/login/login-service.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -13,12 +15,15 @@ export class EntryFormPage implements OnInit {
   loginForm!: FormGroup;
   recuperarUsuarioForm!: FormGroup;
   showLoginForm: boolean = true;
+  isLoading: boolean = false; // Variable para controlar el loader
 
   constructor(
     private menuCtrl: MenuController,
     private alertService: AlertService,
     private buttonDataService: ButtonDataService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private LoginService: LoginService, // Inyectamos el servicio
+    private loadingController: LoadingController // Inyectamos el LoadingController
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -38,9 +43,27 @@ export class EntryFormPage implements OnInit {
     return this.buttonDataService.getClickedButton();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      await this.presentLoading(); // Mostrar loader
+
+      const { username, password } = this.loginForm.value;
+      this.LoginService.login(username, password).subscribe({
+        next: async (response) => {
+          await this.dismissLoading(); // Ocultar loader
+          if (response.success) {
+            console.log('Login exitoso', response.user);
+          } else {
+            console.log('Login fallido');
+            await this.alertService.presentErrorAlert('Error', response.message);
+          }
+        },
+        error: async (error) => {
+          console.error('Error en el inicio de sesión:', error);
+          await this.dismissLoading(); // Ocultar loader
+          await this.alertService.presentErrorAlert('Error', 'Hubo un problema con el inicio de sesión.');
+        }
+      });
     }
   }
 
@@ -85,5 +108,26 @@ export class EntryFormPage implements OnInit {
     this.loginForm.get('username')?.updateValueAndValidity();
     this.loginForm.get('password')?.setValidators(Validators.required);
     this.loginForm.get('password')?.updateValueAndValidity();
+  }
+
+  async presentLoading() {
+    this.isLoading = true;
+    const loader = await this.loadingController.create({
+      message: 'Cargando...',
+    });
+    await loader.present();
+
+    loader.onDidDismiss().then(() => {
+      this.isLoading = false;
+    });
+  }
+
+  async dismissLoading() {
+    if (this.isLoading) {
+      this.isLoading = false;
+      return await this.loadingController.dismiss().catch(() => {});
+    } else {
+      return Promise.resolve(); // Aseguramos que siempre se retorna una promesa
+    }
   }
 }
