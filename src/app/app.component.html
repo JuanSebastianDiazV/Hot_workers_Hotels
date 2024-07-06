@@ -1,5 +1,7 @@
 <ion-app>
-  <app-menu *ngIf="LoginService.isLoggedIn()"></app-menu>
+  <!-- <app-menu *ngIf="LoginService.isLoggedIn()"></app-menu> -->
+  <app-menu></app-menu>
   <ion-router-outlet id="main-content"></ion-router-outlet>
-  <app-tabs *ngIf="LoginService.isLoggedIn()"></app-tabs>
+  <!-- <app-tabs *ngIf="LoginService.isLoggedIn()"></app-tabs> -->
+  <app-tabs></app-tabs>
 </ion-app>

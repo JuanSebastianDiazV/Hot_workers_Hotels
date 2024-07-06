@@ -1,10 +1,12 @@
-<ion-menu side="start" contentId="main-content">
-  <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>Menú</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-menu side="start" contentId="main-content" class="menu-custom">
   <ion-content>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeMenu()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
     <ion-list>
       <ion-item routerLink="/home" (click)="closeMenu()">
         <ion-icon slot="start" name="home"></ion-icon>
