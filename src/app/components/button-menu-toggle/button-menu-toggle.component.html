@@ -1,0 +1,11 @@
+<div class="header-container">
+  <div class="left-container">
+    <ion-buttons slot="start" class="menu-button-custom">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </div>
+  <div class="right-container ion-margin-top">
+    <span class="status-message">{{ isOnline ? 'En línea' : 'Desconectado' }}</span>
+    <ion-toggle slot="end" class="toggle-custom" [checked]="isOnline" (ionChange)="toggleStatus($event)" aria-label="Success toggle" color="success"></ion-toggle>
+  </div>
+</div>

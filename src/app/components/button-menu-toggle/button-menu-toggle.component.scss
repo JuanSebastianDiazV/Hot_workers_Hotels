@@ -1,0 +1,41 @@
+.header-container {
+    width: 100%;
+    background-color: transparent;
+    overflow: auto;
+    padding: 0 16px; /* Espaciado horizontal */
+}
+
+.left-container {
+    float: left;
+    display: flex;
+    align-items: center;
+}
+
+.right-container {
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.menu-button-custom {
+    --color: #ff0000; /* Color rojo */
+    font-size: 2em; /* Aumenta el tamaño del botón */
+}
+
+.menu-button-custom ion-icon {
+    font-size: 2em; /* Aumenta el tamaño del icono */
+    color: #ff0000; /* Color rojo para el icono */
+}
+
+.toggle-custom {
+    --handle-background: #6d6d6d; /* Color del handle */
+    --background-checked: #2da72d; /* Color del fondo cuando está activo */
+    --background: #2da72d; /* Color del fondo cuando está inactivo */
+}
+
+.status-message {
+    margin-left: 10px;
+    color: #ffffff; /* Color del texto del mensaje */
+    font-size: 1.2em;
+    padding-right: 0.5rem;
+  }
