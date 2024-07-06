@@ -1,0 +1,44 @@
+.reservas-container {
+    text-align: center;
+  }
+  
+  .reservas-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .reservas-buttons ion-button {
+    --background: #592934;
+    --color: #fff;
+    border-radius: 20px;
+  }
+  
+  .transaction-card {
+    background-color: #592934;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .transaction-card p {
+    margin: 5px 0;
+  }
+  
+  .transaction-card .amount {
+    text-align: right;
+    font-weight: bold;
+  }
+  
+  .transaction-card .status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .transaction-card .status ion-icon {
+    color: green; /* Cambia a rojo para estado cancelado */
+  }
+  

@@ -1,3 +1,43 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="reservas-container">
+    <div class="reservas-buttons">
+      <ion-button (click)="showPending()"> Reservas Pendientes </ion-button>
+      <ion-button (click)="showUpcoming()"> Próximas Reservas </ion-button>
+    </div>
+
+    <div *ngIf="view === 'pending'" class="reservas-pendientes">
+      <div class="transaction-card" *ngFor="let reserva of pendingReservations">
+        <p><strong>{{ reserva.name }}</strong></p>
+        <p>{{ reserva.date }}</p>
+        <p>{{ reserva.time }}</p>
+        <p>{{ reserva.location }}</p>
+        <p class="amount">{{ reserva.amount }}</p>
+        <div class="status">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>Pendiente</span>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="view === 'upcoming'" class="proximas-reservas">
+      <div
+        class="transaction-card"
+        *ngFor="let reserva of upcomingReservations"
+      >
+        <p><strong>{{ reserva.name }}</strong></p>
+        <p>{{ reserva.date }}</p>
+        <p>{{ reserva.time }}</p>
+        <p>{{ reserva.location }}</p>
+        <p class="amount">{{ reserva.amount }}</p>
+        <div class="status">
+          <ion-icon
+            [name]="reserva.status === 'Completada' ? 'checkmark-circle-outline' : 'close-circle-outline'"
+            [style.color]="reserva.status === 'Completada' ? 'green' : 'red'"
+          ></ion-icon>
+          <span>{{ reserva.status }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

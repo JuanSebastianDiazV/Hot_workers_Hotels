@@ -1,0 +1,54 @@
+.rating-container {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .rating-summary {
+    background-color: #41363686;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .rating-overview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .rating-score h3 {
+    font-size: 3em;
+    margin: 0;
+  }
+  
+  .rating-stars ion-icon {
+    color: yellow;
+    font-size: 2em;
+  }
+  
+  .rating-count p {
+    margin: 0;
+  }
+  
+  .rating-reviews {
+    margin-top: 20px;
+  }
+  
+  .review-card {
+    background-color: #592934;
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  .review-stars ion-icon {
+    color: yellow;
+  }
+  
+  .review-card p {
+    margin: 5px 0;
+  }
+  

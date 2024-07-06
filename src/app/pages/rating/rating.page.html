@@ -1,3 +1,33 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="rating-container">
+    <div class="rating-summary">
+      <h2>CALIFICACIONES Y RESEÑAS</h2>
+      <div class="rating-overview">
+        <div class="rating-score">
+          <h3>4.5</h3>
+        </div>
+        <div class="rating-stars">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-half"></ion-icon>
+        </div>
+        <div class="rating-count">
+          <p>100 Calificaciones</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rating-reviews">
+      <div class="review-card" *ngFor="let review of reviews">
+        <div class="review-stars">
+          <ion-icon name="star" *ngFor="let star of review.stars"></ion-icon>
+        </div>
+        <p>{{ review.text }}</p>
+        <p>{{ review.improvement }}</p>
+      </div>
+    </div>
+  </div>
 </ion-content>

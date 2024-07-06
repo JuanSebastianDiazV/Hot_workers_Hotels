@@ -6,10 +6,67 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reservations.page.scss'],
 })
 export class ReservationsPage implements OnInit {
+  view: string = 'pending'; // Vista actual, puede ser 'pending' o 'upcoming'
 
-  constructor() { }
+  pendingReservations = [
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+    },
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+    },
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+    },
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+    },
+  ];
 
-  ngOnInit() {
+  upcomingReservations = [
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+      status: 'Completada',
+    },
+    {
+      name: 'Pepe',
+      date: 'Domingo, 16 febrero',
+      time: '09:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 100.000',
+      status: 'Cancelada',
+    },
+  ];
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  showPending() {
+    this.view = 'pending';
   }
 
+  showUpcoming() {
+    this.view = 'upcoming';
+  }
 }
