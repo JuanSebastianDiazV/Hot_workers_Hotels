@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { UserDataServiceService } from '../../services/user-data-service/user-data-service.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -13,7 +14,8 @@ export class ResetPasswordPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    private userDataService: UserDataServiceService
   ) {
     this.emailForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -25,6 +27,10 @@ export class ResetPasswordPage implements OnInit {
   }
 
   onSubmit() {
-    this.router.navigate(['/otp-reset-password']);
+    if (this.emailForm.valid) {
+      const email = this.emailForm.get('email')?.value;
+      this.userDataService.setEmail(email); // Guarda el correo en el servicio
+      this.router.navigate(['/otp-reset-password']);
+    }
   }
 }
