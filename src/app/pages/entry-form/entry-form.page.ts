@@ -54,6 +54,7 @@ export class EntryFormPage implements OnInit {
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
           if (response.success) {
+            this.menuCtrl.enable(true);
             this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);
           } else {
