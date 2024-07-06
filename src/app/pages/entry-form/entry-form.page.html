@@ -26,7 +26,7 @@
 
       <div class="session-buttons">
         <ion-button shape="round" expand="block" type="submit" color="danger" class="ion-margin-bottom" [disabled]="!loginForm.valid">Iniciar sesión</ion-button>
-        <ion-button shape="round" expand="block" type="button" color="primary">Registrarme</ion-button>
+        <ion-button shape="round" expand="block" type="button" color="primary" [routerLink]="['/register-general']">Registrarme</ion-button>
       </div>
       <div class="ion-margin-top">
         <ion-button shape="round" expand="block" type="button" class="button-transparent" [routerLink]="['/reset-password']">Recuperar Contraseña</ion-button>

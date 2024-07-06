@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'new-password',
     loadChildren: () => import('./pages/new-password/new-password.module').then( m => m.NewPasswordPageModule)
+  },
+  {
+    path: 'register-general',
+    loadChildren: () => import('./pages/register-general/register-general.module').then( m => m.RegisterGeneralPageModule)
   }
 
 

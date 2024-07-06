@@ -1,0 +1,46 @@
+<ion-content [fullscreen]="true" class="background-general-interior ion-padding">
+  <div class="custom-back-container" routerLink="/entry-form">
+    <img src="assets/images/left-chevron.png" alt="Back" class="custom-back-icon" />
+  </div>
+  <div>
+    <img src="/assets/images/Logo.png" class="logoHot" />
+    <div class="ion-text-center text-white">
+      <h1 class="register-title">Registro</h1>
+    </div>
+    <ion-card class="card-contend ion-margin-top">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input type="email" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-text *ngIf="registerForm.controls['email']?.invalid && registerForm.controls['email']?.touched" color="danger">
+          <p>Por favor, ingrese un correo válido.</p>
+        </ion-text>
+        <ion-item>
+          <ion-label position="floating">Usuario</ion-label>
+          <ion-input formControlName="username"></ion-input>
+        </ion-item>
+        <ion-text *ngIf="registerForm.controls['username']?.invalid && registerForm.controls['username']?.touched" color="danger">
+          <p>Por favor, ingrese un usuario válido.</p>
+        </ion-text>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ion-text *ngIf="registerForm.controls['password']?.invalid && registerForm.controls['password']?.touched" color="danger">
+          <p>Por favor, ingrese una contraseña válida.</p>
+        </ion-text>
+        <ion-item>
+          <ion-label position="floating">Confirma tu Contraseña</ion-label>
+          <ion-input type="password" formControlName="confirmPassword"></ion-input>
+        </ion-item>
+        <ion-text *ngIf="registerForm.errors?.['notSame'] && registerForm.controls['confirmPassword']?.touched" color="danger">
+          <p>Las contraseñas no coinciden.</p>
+        </ion-text>
+        <div class="ion-padding">
+          <ion-button shape="round" expand="full" color="primary" type="submit" [disabled]="registerForm.invalid">Crear Usuario</ion-button>
+        </div>
+      </form>
+    </ion-card>
+  </div>
+</ion-content>
