@@ -45,6 +45,10 @@ const routes: Routes = [
   {
     path: 'register-general',
     loadChildren: () => import('./pages/register-general/register-general.module').then( m => m.RegisterGeneralPageModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   }
 
 

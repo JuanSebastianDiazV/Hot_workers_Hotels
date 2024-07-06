@@ -5,6 +5,7 @@ import { AlertService } from '../../services/alerts/alerts.service';
 import { ButtonDataService } from '../../services/button-data/button-data.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-entry-form',
@@ -23,7 +24,8 @@ export class EntryFormPage implements OnInit {
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder,
     private LoginService: LoginService, // Inyectamos el servicio
-    private loadingController: LoadingController // Inyectamos el LoadingController
+    private loadingController: LoadingController, // Inyectamos el LoadingController
+    private router: Router,
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -52,17 +54,24 @@ export class EntryFormPage implements OnInit {
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
           if (response.success) {
+            this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);
           } else {
             console.log('Login fallido');
-            await this.alertService.presentErrorAlert('Error', response.message);
+            await this.alertService.presentErrorAlert(
+              'Error',
+              response.message
+            );
           }
         },
         error: async (error) => {
           console.error('Error en el inicio de sesión:', error);
           await this.dismissLoading(); // Ocultar loader
-          await this.alertService.presentErrorAlert('Error', 'Hubo un problema con el inicio de sesión.');
-        }
+          await this.alertService.presentErrorAlert(
+            'Error',
+            'Hubo un problema con el inicio de sesión.'
+          );
+        },
       });
     }
   }
