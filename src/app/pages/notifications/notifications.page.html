@@ -1,3 +1,10 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="notifications-container">
+    <h1 class="whiteLabel ion-text-center">Tus notificaciones</h1>
+    <div class="notification-card ion-margin-top" *ngFor="let notification of notifications">
+      <p>{{ notification.message }}</p>
+      <a [routerLink]="['/reservations']" routerLinkActive="router-link-active" >{{ notification.linkText }}</a>
+    </div>
+  </div>
 </ion-content>
