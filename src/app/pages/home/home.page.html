@@ -1,3 +1,17 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="welcome-message">
+    <h1>Bienvenid@</h1>
+    <p>Dirección donde prestarás tu servicio</p>
+    <div class="location-container">
+      <ion-icon name="location-outline"></ion-icon>
+      <span>{{ location ? (location.lat + ', ' + location.lon) : 'Ubicación no disponible' }}</span>
+    </div>
+    <div class="video-banner">
+      <video width="100%" height="auto" autoplay muted loop>
+        <source src="../../../assets/video/welcome.mp4" type="video/mp4">
+        Tu navegador no soporta la etiqueta de video.
+      </video>
+    </div>
+  </div>
 </ion-content>

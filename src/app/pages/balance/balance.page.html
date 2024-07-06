@@ -1,3 +1,35 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="balance-container">
+    <div class="balance-buttons">
+      <ion-button (click)="showEarnings()"> Total Ganancias </ion-button>
+      <ion-button (click)="showPaymentHistory()"> Historial de Pagos </ion-button>
+    </div>
+
+    <div *ngIf="view === 'earnings'" class="balance-summary">
+      <div class="available-balance">
+        <p>SALDO DISPONIBLE</p>
+        <h2>$ 250.000</h2>
+      </div>
+      <div class="earnings-list ion-margin-top">
+        <div class="transaction-card" *ngFor="let earning of earnings">
+          <p><strong>{{ earning.name }}</strong></p>
+          <p>{{ earning.date }}</p>
+          <p>{{ earning.time }}</p>
+          <p>{{ earning.location }}</p>
+          <p class="amount">{{ earning.amount }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="view === 'paymentHistory'" class="payment-history">
+      <div class="transaction-card" *ngFor="let payment of paymentHistory">
+        <p><strong>{{ payment.name }}</strong></p>
+        <p>{{ payment.date }}</p>
+        <p>{{ payment.time }}</p>
+        <p>{{ payment.location }}</p>
+        <p class="amount">{{ payment.amount }}</p>
+      </div>
+    </div>
+  </div>
 </ion-content>
