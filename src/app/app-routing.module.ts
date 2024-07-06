@@ -48,10 +48,32 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./pages/notifications/notifications.module').then( m => m.NotificationsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reservations',
+    loadChildren: () => import('./pages/reservations/reservations.module').then( m => m.ReservationsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'balance',
+    loadChildren: () => import('./pages/balance/balance.module').then( m => m.BalancePageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'rating',
+    loadChildren: () => import('./pages/rating/rating.module').then( m => m.RatingPageModule),
+    canActivate: [AuthGuard]
   }
-
-
-
 ];
  
 @NgModule({
