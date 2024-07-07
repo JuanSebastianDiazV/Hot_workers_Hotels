@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RatesPageRoutingModule } from './rates-routing.module';
 import { RatesPage } from './rates.page';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from '../../components/components.module'
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ComponentsModule } from '../../components/components.module'
     FormsModule,
     IonicModule,
     RatesPageRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    ReactiveFormsModule
   ],
   declarations: [RatesPage]
 })

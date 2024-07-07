@@ -1,3 +1,56 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="form-container">
+    <div class="custom-back-container" routerLink="/profile">
+      <img src="assets/images/left-chevron.png" alt="Back" class="custom-back-icon" />
+    </div>
+    <form [formGroup]="ratesForm" (ngSubmit)="save()" class="ion-padding">
+      <h1 class="whiteLabel ion-text-center">Tarifas</h1>
+      <p class="whiteLabel ion-text-center">
+        Recuerda colocar las tarifas, en pesos Colombianos<br>
+        <strong>Debes colocar la tarifa plena de todos los servicios que ofreces</strong>
+      </p>
+      <ion-item>
+        <ion-label position="floating">$ 30 minutos</ion-label>
+        <ion-input formControlName="thirtyMinutes" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="ratesForm.get('thirtyMinutes')?.touched && ratesForm.get('thirtyMinutes')?.invalid">
+        <p *ngIf="ratesForm.get('thirtyMinutes')?.errors?.['required']">La tarifa de 30 minutos es requerida.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">$ 1 hora</ion-label>
+        <ion-input formControlName="oneHour" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="ratesForm.get('oneHour')?.touched && ratesForm.get('oneHour')?.invalid">
+        <p *ngIf="ratesForm.get('oneHour')?.errors?.['required']">La tarifa de 1 hora es requerida.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">$ 3 horas</ion-label>
+        <ion-input formControlName="threeHours" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="ratesForm.get('threeHours')?.touched && ratesForm.get('threeHours')?.invalid">
+        <p *ngIf="ratesForm.get('threeHours')?.errors?.['required']">La tarifa de 3 horas es requerida.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">$ Amanecida</ion-label>
+        <ion-input formControlName="overnight" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="ratesForm.get('overnight')?.touched && ratesForm.get('overnight')?.invalid">
+        <p *ngIf="ratesForm.get('overnight')?.errors?.['required']">La tarifa de amanecida es requerida.</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">$ Tarifa por día</ion-label>
+        <ion-input formControlName="dayRate" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="ratesForm.get('dayRate')?.touched && ratesForm.get('dayRate')?.invalid">
+        <p *ngIf="ratesForm.get('dayRate')?.errors?.['required']">La tarifa por día es requerida.</p>
+      </ion-text>
+
+      <ion-button shape="round" color="danger" class="ion-margin-top" expand="block" type="submit" [disabled]="!ratesForm.valid">Guardar</ion-button>
+    </form>
+  </div>
 </ion-content>
