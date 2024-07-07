@@ -1,3 +1,32 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="profile-container ion-margin-top">
+    <div
+      [ngStyle]="{'border-color': getProgressColor()}"
+      class="progress-circle"
+    >
+      <h2>{{ progress }}%</h2>
+    </div>
+    <p class="whiteLabel ion-margin-top">
+      Has completado el {{ progress }}% de tu perfil. Completa el 100% para que
+      tu perfil sea más visible.
+    </p>
+    <div class="buttonsProfile">
+      <ion-button expand="block" (click)="navigateTo('personal-info')"
+        >Información Personal</ion-button
+      >
+      <ion-button expand="block" (click)="navigateTo('bank-info')"
+        >Información Bancaria</ion-button
+      >
+      <ion-button expand="block" (click)="navigateTo('photos-videos')"
+        >Fotos y Videos</ion-button
+      >
+      <ion-button expand="block" (click)="navigateTo('description')"
+        >Descripción</ion-button
+      >
+      <ion-button expand="block" (click)="navigateTo('rates')"
+        >Tarifas</ion-button
+      >
+    </div>
+  </div>
 </ion-content>

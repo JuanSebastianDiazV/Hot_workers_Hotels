@@ -73,7 +73,27 @@ const routes: Routes = [
     path: 'rating',
     loadChildren: () => import('./pages/rating/rating.module').then( m => m.RatingPageModule),
     // canActivate: [AuthGuard]
+  },  {
+    path: 'personal-info',
+    loadChildren: () => import('./pages/personal-info/personal-info.module').then( m => m.PersonalInfoPageModule)
+  },
+  {
+    path: 'bank-info',
+    loadChildren: () => import('./pages/bank-info/bank-info.module').then( m => m.BankInfoPageModule)
+  },
+  {
+    path: 'photos-videos',
+    loadChildren: () => import('./pages/photos-videos/photos-videos.module').then( m => m.PhotosVideosPageModule)
+  },
+  {
+    path: 'description',
+    loadChildren: () => import('./pages/description/description.module').then( m => m.DescriptionPageModule)
+  },
+  {
+    path: 'rates',
+    loadChildren: () => import('./pages/rates/rates.module').then( m => m.RatesPageModule)
   }
+
 ];
  
 @NgModule({

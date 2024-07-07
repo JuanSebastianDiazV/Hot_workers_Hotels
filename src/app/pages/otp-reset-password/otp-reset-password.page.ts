@@ -111,23 +111,23 @@ export class OtpResetPasswordPage implements OnInit, OnDestroy {
   }
 
   continue() {
-    this.router.navigate(['/new-password']);
-    // if (this.otp.length === 6) {
-    //   if (this.otp === this.correctOtp) {
-    //     this.router.navigate(['/new-password']);
-    //   } else {
-    //     this.alertService.presentErrorAlert(
-    //       'Error',
-    //       'El código ingresado es incorrecto.'
-    //     );
-    //     this.clearOtpFields();
-    //   }
-    // } else {
-    //   this.alertService.presentErrorAlert(
-    //     'Advertencia',
-    //     'Por favor, ingresa un código de 6 dígitos.'
-    //   );
-    //   this.clearOtpFields();
-    // }
+    // this.router.navigate(['/new-password']);
+    if (this.otp.length === 6) {
+      if (this.otp === this.correctOtp) {
+        this.router.navigate(['/new-password']);
+      } else {
+        this.alertService.presentErrorAlert(
+          'Error',
+          'El código ingresado es incorrecto.'
+        );
+        this.clearOtpFields();
+      }
+    } else {
+      this.alertService.presentErrorAlert(
+        'Advertencia',
+        'Por favor, ingresa un código de 6 dígitos.'
+      );
+      this.clearOtpFields();
+    }
   }
 }

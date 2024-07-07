@@ -1,0 +1,32 @@
+.profile-container {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  .progress-circle {
+    margin: 20px auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 10px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+  
+  .progress-circle h2 {
+    margin: 0;
+    font-size: 2.5em;
+    color: #4caf50; /* Color del texto del progreso */
+  }
+  
+  ion-button {
+    --background: #592934;
+    --color: #fff;
+    margin-top: 10px;
+  }
+
+  .buttonsProfile{
+    margin-top: 2rem;
+  }

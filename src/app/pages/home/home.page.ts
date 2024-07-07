@@ -6,10 +6,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  location: { lat: number; lon: number } | null = null;
+  address: string = '';
+  location: string | null = null;
+  addressSaved: boolean = false;
+  showAddressForm: boolean = false;
 
   constructor() {}
+
   ngOnInit(): void {
-    this.location = { lat: 40.7128, lon: -74.006 };
+    this.loadAddress();
+  }
+
+  toggleAddressForm() {
+    this.showAddressForm = !this.showAddressForm;
+  }
+
+  saveAddress() {
+    localStorage.setItem('address', this.address);
+    this.location = this.address;
+    this.address = '';
+    this.addressSaved = true;
+    this.showAddressForm = false;
+  }
+
+  loadAddress() {
+    const storedAddress = localStorage.getItem('address');
+    if (storedAddress) {
+      this.address = '';
+      this.location = storedAddress;
+      this.addressSaved = true;
+    }
   }
 }
