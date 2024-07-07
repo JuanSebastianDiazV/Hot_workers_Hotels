@@ -1,13 +1,143 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>personal-info</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="background-general-interior">
+  <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="form-container">
+    <div class="custom-back-container" routerLink="/profile">
+      <img
+        src="assets/images/left-chevron.png"
+        alt="Back"
+        class="custom-back-icon"
+      />
+    </div>
+    <form
+      [formGroup]="personalInfoForm"
+      (ngSubmit)="save()"
+      class="ion-padding"
+    >
+      <h1 class="whiteLabel ion-text-center">Información personal</h1>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">personal-info</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="name" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('name')?.touched && personalInfoForm.get('name')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('name')?.errors?.['required']">
+          El nombre es requerido.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input formControlName="lastName" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('lastName')?.touched && personalInfoForm.get('lastName')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('lastName')?.errors?.['required']">
+          Los apellidos son requeridos.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input formControlName="user" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('user')?.touched && personalInfoForm.get('user')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('user')?.errors?.['required']">
+          El usuario es requerido.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Correo Electrónico</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('email')?.touched && personalInfoForm.get('email')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('email')?.errors?.['required']">
+          El correo electrónico es requerido.
+        </p>
+        <p *ngIf="personalInfoForm.get('email')?.errors?.['email']">
+          El correo electrónico no es válido.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Género</ion-label>
+        <ion-select formControlName="gender">
+          <ion-select-option value="masculino">Masculino</ion-select-option>
+          <ion-select-option value="femenino">Femenino</ion-select-option>
+          <ion-select-option value="indefinido">Indefinido</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tipo de Documento</ion-label>
+        <ion-select formControlName="documentType">
+          <ion-select-option value="cc">Cédula de Ciudadanía</ion-select-option>
+          <ion-select-option value="ce"
+            >Cédula de Extranjería</ion-select-option
+          >
+          <ion-select-option value="passport">Pasaporte</ion-select-option>
+          <ion-select-option value="pep">PEP</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Número de Documento</ion-label>
+        <ion-input formControlName="documentNumber" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('documentNumber')?.touched && personalInfoForm.get('documentNumber')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('documentNumber')?.errors?.['required']">
+          El número de documento es requerido.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="stacked">Fecha de Nacimiento</ion-label>
+        <ion-input type="date" formControlName="birthDate"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('birthDate')?.touched && personalInfoForm.get('birthDate')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('birthDate')?.errors?.['required']">
+          La fecha de nacimiento es requerida.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Número de Celular</ion-label>
+        <ion-input formControlName="phoneNumber" type="text"></ion-input>
+      </ion-item>
+      <ion-text
+        color="danger"
+        *ngIf="personalInfoForm.get('phoneNumber')?.touched && personalInfoForm.get('phoneNumber')?.invalid"
+      >
+        <p *ngIf="personalInfoForm.get('phoneNumber')?.errors?.['required']">
+          El número de celular es requerido.
+        </p>
+      </ion-text>
+      <ion-button
+        shape="round"
+        class="ion-margin-top"
+        color="danger"
+        expand="block"
+        type="submit"
+        [disabled]="!personalInfoForm.valid"
+        >Guardar</ion-button
+      >
+    </form>
+  </div>
 </ion-content>

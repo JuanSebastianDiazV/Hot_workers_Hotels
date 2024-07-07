@@ -1,7 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../services/alerts/alerts.service';
-
+import { ProfileProgressService } from '../../services/profile-progress-service/profile-progress-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,39 +8,33 @@ import { AlertService } from '../../services/alerts/alerts.service';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
-  progress: number = 100
+  progress: number;
   constructor(
-    private alertService: AlertService,
     private router: Router,
-  ) { }
-
-  ngOnInit() {
-    // this.alertService.presentErrorAlert(
-    //   'Error',
-    //   'Hubo un problema con el cargue de los datos del perfil',
-    //   () => {
-    //     this.router.navigate(['/home']);
-        
-    //   }
-    // );
+    private progressService: ProfileProgressService
+  ) {
+    this.progress = this.progressService.getProgress();
   }
+
+  ngOnInit() {}
 
   navigateTo(section: string) {
     this.router.navigate([`/${section}`]);
   }
 
   getProgressColor(): string {
-    if (this.progress <= 20) {
+    if (this.progress <= 5) {
       return 'gray';
-    } else if (this.progress <= 40) {
+    } else if (this.progress <= 24) {
       return 'yellow';
-    } else if (this.progress <= 60) {
+    } else if (this.progress <= 43) {
       return 'orange';
-    } else if (this.progress <= 80) {
+    } else if (this.progress <= 62) {
       return 'lightgreen';
-    } else {
+    } else if (this.progress <= 81) {
       return 'green';
+    } else {
+      return 'darkgreen';
     }
   }
-
 }
