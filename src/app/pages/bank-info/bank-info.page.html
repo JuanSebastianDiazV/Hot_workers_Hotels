@@ -1,13 +1,60 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>bank-info</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="background-general-interior">
+  <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="form-container">
+    <div class="custom-back-container" routerLink="/profile">
+      <img src="assets/images/left-chevron.png" alt="Back" class="custom-back-icon" />
+    </div>
+    <form [formGroup]="bankInfoForm" (ngSubmit)="save()" class="ion-padding">
+      <h1 class="whiteLabel ion-text-center">Información Bancaria</h1>
+      <p class="whiteLabel">
+        Recuerda que la cuenta bancaria que suministres, debe estar a nombre del
+        usuario registrado en la app
+      </p>
+      <ion-item>
+        <ion-label position="floating">Banco</ion-label>
+        <ion-select formControlName="bank">
+          <ion-select-option value="bancolombia">Bancolombia</ion-select-option>
+          <ion-select-option value="banco_caja_social">Banco Caja Social</ion-select-option>
+          <ion-select-option value="banco_de_occidente">Banco de Occidente</ion-select-option>
+          <ion-select-option value="banco_popular">Banco Popular</ion-select-option>
+          <ion-select-option value="banco_av_villas">Banco AV Villas</ion-select-option>
+          <ion-select-option value="nequi">Nequi</ion-select-option>
+          <ion-select-option value="daviplata">Daviplata</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger" *ngIf="bankInfoForm.get('bank')?.touched && bankInfoForm.get('bank')?.invalid">
+        <p *ngIf="bankInfoForm.get('bank')?.errors?.['required']">
+          El banco es requerido.
+        </p>
+      </ion-text>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">bank-info</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-item>
+        <ion-label position="floating">Tipo de Cuenta</ion-label>
+        <ion-select formControlName="accountType">
+          <ion-select-option value="ahorros">Cuenta de Ahorros</ion-select-option>
+          <ion-select-option value="corriente">Cuenta Corriente</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger"
+        *ngIf="bankInfoForm.get('accountType')?.touched && bankInfoForm.get('accountType')?.invalid">
+        <p *ngIf="bankInfoForm.get('accountType')?.errors?.['required']">
+          El tipo de cuenta es requerido.
+        </p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label position="floating">Número de Cuenta</ion-label>
+        <ion-input formControlName="accountNumber" type="text"></ion-input>
+      </ion-item>
+      <ion-text color="danger"
+        *ngIf="bankInfoForm.get('accountNumber')?.touched && bankInfoForm.get('accountNumber')?.invalid">
+        <p *ngIf="bankInfoForm.get('accountNumber')?.errors?.['required']">
+          El número de cuenta es requerido.
+        </p>
+      </ion-text>
+
+      <ion-button expand="block" shape="round" class="ion-margin-top" color="danger" type="submit"
+        [disabled]="!bankInfoForm.valid">Guardar</ion-button>
+    </form>
+  </div>
 </ion-content>
