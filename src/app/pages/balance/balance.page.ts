@@ -22,6 +22,20 @@ export class BalancePage implements OnInit {
       time: '10:00 a.m.',
       location: 'Hotel Las Margaritas',
       amount: '$ 150.000'
+    },
+    {
+      name: 'Ana',
+      date: 'Lunes, 17 febrero',
+      time: '10:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 150.000'
+    },
+    {
+      name: 'Ana',
+      date: 'Lunes, 17 febrero',
+      time: '10:00 a.m.',
+      location: 'Hotel Las Margaritas',
+      amount: '$ 150.000'
     }
   ];
 
@@ -30,16 +44,23 @@ export class BalancePage implements OnInit {
       name: 'Juan',
       date: 'Lunes, 17 febrero',
       time: '10:00 a.m.',
-      location: 'Hotel Los Andes',
+      location: 'Nequi',
       amount: '$ 200.000'
     },
     {
       name: 'Carlos',
       date: 'Martes, 18 febrero',
       time: '11:00 a.m.',
-      location: 'Hotel Los Pinos',
+      location: 'Nequi',
       amount: '$ 150.000'
-    }
+    },
+    {
+      name: 'Juan',
+      date: 'Lunes, 17 febrero',
+      time: '10:00 a.m.',
+      location: 'Nequi',
+      amount: '$ 200.000'
+    },
   ];
 
   constructor() { }

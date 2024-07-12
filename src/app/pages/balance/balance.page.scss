@@ -1,58 +1,54 @@
 .balance-container {
-    padding: 16px;
-    text-align: center;
-  }
-  
-  .balance-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .balance-buttons ion-button {
-    --background: #592934;
-    --color: #fff;
-    border-radius: 20px;
-  }
-  
-  .balance-summary {
-    background-color: #55050563;
-    border-radius: 10px;
-    padding: 20px;
-    color: white;
-    margin-bottom: 20px;
-  }
-  
-  .available-balance p {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .available-balance h2 {
-    margin: 0;
-    font-size: 2.5em;
-    font-weight: bold;
-  }
-  
-  .payment-history {
-    margin-top: 20px;
-  }
-  
-  .transaction-card {
-    background-color: #42cf42d8;
-    border-radius: 10px;
-    padding: 15px;
-    color: white;
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  
-  .transaction-card p {
-    margin: 5px 0;
-  }
-  
-  .transaction-card .amount {
-    text-align: right;
-    font-weight: bold;
-  }
-  
+  padding: 16px;
+  text-align: center;
+}
+
+.balance-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.balance-summary {
+  background-color: #6f6f6f;
+  border-radius: 35px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.available-balance p {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.available-balance h2 {
+  margin: 0;
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.payment-history {
+  margin-top: 20px;
+}
+
+.transaction-card {
+  text-align: center;
+  background-color: #645c5d;
+  border-radius: 20px;
+  padding: 15px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.transaction-card p {
+  margin: 5px 0;
+}
+
+.transaction-card .amount {
+  font-weight: bold;
+}
+
+.cash-icon{
+  font-size: 3rem;
+}
