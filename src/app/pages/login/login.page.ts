@@ -8,6 +8,7 @@ import {
   FormControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { App } from '@capacitor/app';
 
 @Component({
   selector: 'app-login',
@@ -27,11 +28,11 @@ export class LoginPage implements OnInit {
     this.initForm();
     this.menuCtrl.enable(false);
   }
-    
-  initForm(){
+
+  initForm() {
     this.form = this.fb.group({
       terms: [false],
-    })
+    });
   }
 
   get f() {
@@ -42,7 +43,7 @@ export class LoginPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModalTermsPage,
       breakpoints: [0, 0.3, 0.5, 0.8],
-      initialBreakpoint: 0.55,
+      initialBreakpoint: 0.9,
       componentProps: {
         aceptTerms: false,
       },
@@ -58,7 +59,7 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/landing']);
   }
 
-  // exitApp() {
-  //   navigator['app'].exitApp();
-  // }
+  exitApp() {
+    App.exitApp();
+  }
 }
