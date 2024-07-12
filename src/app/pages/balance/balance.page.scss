@@ -1,19 +1,10 @@
 .balance-container {
-  padding: 16px;
   text-align: center;
 }
 
 .balance-buttons {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.balance-summary {
-  background-color: #7e535370;
-  border-radius: 35px;
-  padding: 20px;
-  color: white;
   margin-bottom: 20px;
 }
 
@@ -35,6 +26,14 @@
 .transaction-card {
   text-align: center;
   background-color: #f9250976;
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.transaction-card-line{
+  border-bottom: 1px solid #f9250976;
+  background-color: #786b6a31;
   border-radius: 20px;
   color: white;
   margin-bottom: 10px;

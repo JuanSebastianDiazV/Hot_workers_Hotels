@@ -7,45 +7,50 @@
         <ion-button shape="round" expand="block" color="danger" (click)="showEarnings()"> Total Ganancias </ion-button>
       </ion-col>
       <ion-col size="6" size-md="6">
-        <ion-button shape="round" expand="block" color="dark" (click)="showPaymentHistory()"> Historial de Pagos </ion-button>
+        <ion-button shape="round" expand="block" color="dark" (click)="showPaymentHistory()"> Historial de Pagos
+        </ion-button>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col size="12">
-        <h3 *ngIf="view === 'earnings'" class="whiteLabel">Total Ganancias</h3>
-        <h3 *ngIf="view === 'paymentHistory'" class="whiteLabel">Historial de pagos</h3>
-      </ion-col>
-    </ion-row>
+    <ion-card class="card-contend">
+      <ion-row>
+        <ion-col size="12">
+          <h3 *ngIf="view === 'earnings'" class="whiteLabel">Total Ganancias</h3>
+          <h3 *ngIf="view === 'paymentHistory'" class="whiteLabel">Historial de pagos</h3>
+        </ion-col>
+      </ion-row>
 
-    <ion-row *ngIf="view === 'earnings'" class="balance-summary">
-      <ion-col size="12" class="available-balance">
-        <p>SALDO DISPONIBLE</p>
-        <h2>$ 250.000</h2>
-      </ion-col>
-      <ion-col size="12" class="earnings-list ion-margin-top">
-        <ion-row>
-          <ion-col size="12" *ngFor="let earning of earnings" class="transaction-card">
-            <ion-icon name="cash-outline" class="cash-icon"></ion-icon>
-            <p><strong>{{ earning.name }}</strong></p>
-            <p>{{ earning.date }}</p>
-            <p>{{ earning.time }}</p>
-            <p>{{ earning.location }}</p>
-            <p class="amount">{{ earning.amount }}</p>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="view === 'earnings'">
+        <ion-col size="12" class="available-balance transaction-card">
+          <p>SALDO DISPONIBLE</p>
+          <h2>$ 250.000</h2>
+        </ion-col>
+        <ion-col size="12" class="earnings-list ion-margin-top">
+          <ion-row>
+            <ion-col size="12" *ngFor="let earning of earnings" class="transaction-card-line">
+              <ion-icon name="cash-outline" class="cash-icon"></ion-icon>
+              <p><strong>{{ earning.name }}</strong></p>
+              <p>{{ earning.date }}</p>
+              <p>{{ earning.time }}</p>
+              <p>{{ earning.location }}</p>
+              <p class="amount">{{ earning.amount }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
 
-    <ion-row *ngIf="view === 'paymentHistory'" class="payment-history">
-      <ion-col size="12" *ngFor="let payment of paymentHistory" class="transaction-card">
-        <ion-icon name="time-outline" class="cash-icon"></ion-icon>
-        <p><strong>{{ payment.name }}</strong></p>
-        <p>{{ payment.date }}</p>
-        <p>{{ payment.time }}</p>
-        <p>{{ payment.location }}</p>
-        <p class="amount">{{ payment.amount }}</p>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="view === 'paymentHistory'" class="payment-history">
+        <ion-col size="12" *ngFor="let payment of paymentHistory" class="transaction-card-line">
+          <ion-icon name="time-outline" class="cash-icon"></ion-icon>
+          <p><strong>{{ payment.name }}</strong></p>
+          <p>{{ payment.date }}</p>
+          <p>{{ payment.time }}</p>
+          <p>{{ payment.location }}</p>
+          <p class="amount">{{ payment.amount }}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+
+
   </ion-grid>
 </ion-content>
