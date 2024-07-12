@@ -6,7 +6,7 @@ import { ButtonDataService } from '../../services/button-data/button-data.servic
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login-service.service';
 import { Router } from '@angular/router';
-
+import { FormService } from '../../services/form-service/formservice.service';
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.page.html',
@@ -26,11 +26,14 @@ export class EntryFormPage implements OnInit {
     private LoginService: LoginService, // Inyectamos el servicio
     private loadingController: LoadingController, // Inyectamos el LoadingController
     private router: Router,
+    private formService: FormService
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+
+    this.formService.setForm('loginForm', this.loginForm);
 
     this.recuperarUsuarioForm = this.formBuilder.group({
       resetUser: ['', [Validators.required, Validators.email]],

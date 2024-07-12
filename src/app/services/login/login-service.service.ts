@@ -17,7 +17,7 @@ export class LoginService {
     // Datos hardcodeados para simular la respuesta del servidor
     const users = [
       { id: 1, name: 'cesarMolina1', password: 'password123' },
-      { id: 2, name: 'JavierUrbina1', password: 'password123' },
+      { id: 2, name: 'javierUrbina1', password: 'password123' },
     ];
 
     const user = users.find(
@@ -26,6 +26,7 @@ export class LoginService {
 
     if (user) {
       this.loggedIn = true;
+      localStorage.setItem('loggedIn', 'true'); // Guardar el estado en el almacenamiento local
       return of({ success: true, user });
     } else {
       return of({
@@ -36,10 +37,13 @@ export class LoginService {
   }
 
   isLoggedIn(): boolean {
-    return this.loggedIn;
+    return this.loggedIn || localStorage.getItem('loggedIn') === 'true';
   }
 
   logout(): void {
     this.loggedIn = false;
+    localStorage.removeItem('loggedIn'); // Eliminar el estado del almacenamiento local
+    localStorage.clear();
+    sessionStorage.clear();
   }
 }
