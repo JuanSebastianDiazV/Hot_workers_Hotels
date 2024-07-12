@@ -23,51 +23,58 @@
         </ion-col>
       </ion-row>
       
-    <ion-row *ngIf="view === 'pending'" class="reservas-pendientes">
-      <ion-col size="12" *ngFor="let reserva of pendingReservations" class="transaction-card">
-        <p><strong>{{ reserva.name }}</strong></p>
-        <p>{{ reserva.date }}</p>
-        <p>{{ reserva.time }}</p>
-        <p>{{ reserva.location }}</p>
-        <p class="amount">{{ reserva.amount }}</p>
-        <div class="status">
-          <ion-button size="small" color="success" (click)="acceptReservation(reserva)">Aceptar</ion-button>
-          <ion-button size="small" color="danger" (click)="rejectReservation(reserva)">Rechazar</ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="view === 'pending'" class="reservas-pendientes">
+        <ion-col size="12" *ngIf="pendingReservations.length === 0">
+          <p class="ion-text-center">No hay reservas pendientes.</p>
+        </ion-col>
+        <ion-col size="12" *ngFor="let reserva of pendingReservations" class="transaction-card">
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-button size="small" color="success" (click)="acceptReservation(reserva)">Aceptar</ion-button>
+            <ion-button size="small" color="danger" (click)="rejectReservation(reserva)">Rechazar</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
 
-    <ion-row *ngIf="view === 'upcoming'" class="proximas-reservas">
-      <ion-col size="12" *ngFor="let reserva of upcomingReservations" class="transaction-card">
-        <p><strong>{{ reserva.name }}</strong></p>
-        <p>{{ reserva.date }}</p>
-        <p>{{ reserva.time }}</p>
-        <p>{{ reserva.location }}</p>
-        <p class="amount">{{ reserva.amount }}</p>
-        <div class="status">
-          <ion-button size="small" color="danger" (click)="cancelReservation(reserva)">Cancelar</ion-button>
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="view === 'upcoming'" class="proximas-reservas">
+        <ion-col size="12" *ngIf="upcomingReservations.length === 0">
+          <p class="ion-text-center">No hay próximas reservas.</p>
+        </ion-col>
+        <ion-col size="12" *ngFor="let reserva of upcomingReservations" class="transaction-card">
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-button size="small" color="danger" (click)="cancelReservation(reserva)">Cancelar</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
 
-    <ion-row *ngIf="view === 'history'" class="historial">
-      <ion-col size="12" *ngFor="let reserva of historyReservations" class="transaction-card">
-        <p><strong>{{ reserva.name }}</strong></p>
-        <p>{{ reserva.date }}</p>
-        <p>{{ reserva.time }}</p>
-        <p>{{ reserva.location }}</p>
-        <p class="amount">{{ reserva.amount }}</p>
-        <div class="status">
-          <ion-icon
-            [name]="reserva.status === 'Completada' ? 'checkmark-circle-outline' : 'close-circle-outline'"
-            [style.color]="reserva.status === 'Completada' ? 'green' : 'red'"
-          ></ion-icon>
-          <span>{{ reserva.status }}</span>
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row *ngIf="view === 'history'" class="historial">
+        <ion-col size="12" *ngIf="historyReservations.length === 0">
+          <p class="ion-text-center">No hay reservas en el historial.</p>
+        </ion-col>
+        <ion-col size="12" *ngFor="let reserva of historyReservations" class="transaction-card">
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-icon
+              [name]="reserva.status === 'Completada' ? 'checkmark-circle-outline' : 'close-circle-outline'"
+              [style.color]="reserva.status === 'Completada' ? 'green' : 'red'"
+            ></ion-icon>
+            <span>{{ reserva.status }}</span>
+          </div>
+        </ion-col>
+      </ion-row>
     </ion-card>
-
-
   </ion-grid>
 </ion-content>

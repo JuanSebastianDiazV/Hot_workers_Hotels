@@ -50,19 +50,19 @@ export class ReservationsPage implements OnInit {
 
   acceptReservation(reserva: Reservation) {
     reserva.status = 'Completada';
-    this.upcomingReservations.push(reserva);
+    this.upcomingReservations.unshift(reserva);
     this.pendingReservations = this.pendingReservations.filter(r => r !== reserva);
   }
 
   rejectReservation(reserva: Reservation) {
     reserva.status = 'Cancelada';
-    this.historyReservations.push(reserva);
+    this.historyReservations.unshift(reserva);
     this.pendingReservations = this.pendingReservations.filter(r => r !== reserva);
   }
 
   cancelReservation(reserva: Reservation) {
     reserva.status = 'Cancelada';
-    this.historyReservations.push(reserva);
+    this.historyReservations.unshift(reserva);
     this.upcomingReservations = this.upcomingReservations.filter(r => r !== reserva);
   }
 }
