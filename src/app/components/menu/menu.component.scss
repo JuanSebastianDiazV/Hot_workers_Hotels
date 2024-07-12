@@ -1,18 +1,17 @@
 .menu-custom {
-    --ion-background-color: #F92509;
-    --ion-text-color: #ffffff;
-    --ion-icon-color: #ffffff;
-  }
-  
-  ion-menu.menu-custom ion-content,
-  ion-menu.menu-custom ion-list,
-  ion-menu.menu-custom ion-item,
-  ion-menu.menu-custom ion-label,
-  ion-menu.menu-custom ion-icon {
-    color: var(--ion-text-color) !important;
-  }
-  
-  ion-menu.menu-custom ion-item {
-    --border-color: transparent;
-  }
-  
+  --ion-background-color: #75180b8f;
+  --ion-text-color: #ffffff;
+  --ion-icon-color: #ffffff;
+}
+
+ion-menu.menu-custom ion-content,
+ion-menu.menu-custom ion-list,
+ion-menu.menu-custom ion-item,
+ion-menu.menu-custom ion-label,
+ion-menu.menu-custom ion-icon {
+  color: var(--ion-text-color) !important;
+}
+
+ion-menu.menu-custom ion-item {
+  --border-color: transparent;
+}
