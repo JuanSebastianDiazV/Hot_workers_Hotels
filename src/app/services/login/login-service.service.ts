@@ -1,39 +1,32 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment'; // Asegúrate de ajustar la ruta según tu estructura de carpetas
+import { AuthService } from '../auth-service/auth.service'; // Asegúrate de ajustar la ruta según tu estructura de carpetas
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   private loggedIn = false;
-  constructor(private http: HttpClient) {}
 
-  login(username: string, password: string): Observable<any> {
-    // Simulamos una solicitud POST
-    const endpoint = 'https://example.com/api/login'; // URL ficticia para el endpoint
-    const body = { username, password };
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-    // Datos hardcodeados para simular la respuesta del servidor
-    const users = [
-      { id: 1, name: 'cesarMolina1', password: 'password123' },
-      { id: 2, name: 'javierUrbina1', password: 'password123' },
-    ];
+  login(username: string, password: string, type: string = 'U'): Observable<any> {
+    const endpoint = `${environment.urlBase}login`; // Utiliza la URL base del entorno
+    const body = { username, password, type }; // Incluye el parámetro `type` en el cuerpo de la solicitud
 
-    const user = users.find(
-      (user) => user.name === username && user.password === password
+    // Realiza la solicitud HTTP POST al endpoint
+    return this.http.post(endpoint, body).pipe(
+      tap((response: any) => {
+        if (response.success) {
+          this.loggedIn = true;
+          localStorage.setItem('loggedIn', 'true'); // Guardar el estado en el almacenamiento local
+          this.authService.setToken(response.token); // Guardar el token recibido del servidor
+        }
+      })
     );
-
-    if (user) {
-      this.loggedIn = true;
-      localStorage.setItem('loggedIn', 'true'); // Guardar el estado en el almacenamiento local
-      return of({ success: true, user });
-    } else {
-      return of({
-        success: false,
-        message: 'Usuario o contraseña incorrectos',
-      });
-    }
   }
 
   isLoggedIn(): boolean {
@@ -43,6 +36,7 @@ export class LoginService {
   logout(): void {
     this.loggedIn = false;
     localStorage.removeItem('loggedIn'); // Eliminar el estado del almacenamiento local
+    this.authService.removeToken(); // Eliminar el token
     localStorage.clear();
     sessionStorage.clear();
   }
