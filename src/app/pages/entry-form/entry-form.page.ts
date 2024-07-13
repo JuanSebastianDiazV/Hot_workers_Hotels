@@ -57,7 +57,7 @@ export class EntryFormPage implements OnInit {
       this.loginService.login(username, password, type).subscribe({
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
-          if (response.success) {
+          if (response) {
             this.menuCtrl.enable(true);
             this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);
