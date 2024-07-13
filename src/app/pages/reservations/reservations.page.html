@@ -1,43 +1,144 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
-  <div class="reservas-container">
-    <div class="reservas-buttons">
-      <ion-button (click)="showPending()"> Reservas Pendientes </ion-button>
-      <ion-button (click)="showUpcoming()"> Próximas Reservas </ion-button>
-    </div>
+  <ion-grid class="reservas-container">
+    <h1 class="ion-text-center whiteLabel">Mis reservas</h1>
+    <ion-row class="reservas-buttons">
+      <ion-col size="12" size-md="4">
+        <ion-button
+          shape="round"
+          expand="block"
+          class="button-reservations"
+          [ngClass]="{'button-selected': view === 'pending'}"
+          (click)="setView('pending')"
+        >
+          Reservas Pendientes
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="4">
+        <ion-button
+          shape="round"
+          expand="block"
+          class="button-reservations"
+          [ngClass]="{'button-selected': view === 'upcoming'}"
+          (click)="setView('upcoming')"
+        >
+          Próximas Reservas
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="4">
+        <ion-button
+          shape="round"
+          expand="block"
+          class="button-reservations"
+          [ngClass]="{'button-selected': view === 'history'}"
+          (click)="setView('history')"
+        >
+          Historial
+        </ion-button>
+      </ion-col>
+    </ion-row>
 
-    <div *ngIf="view === 'pending'" class="reservas-pendientes">
-      <div class="transaction-card" *ngFor="let reserva of pendingReservations">
-        <p><strong>{{ reserva.name }}</strong></p>
-        <p>{{ reserva.date }}</p>
-        <p>{{ reserva.time }}</p>
-        <p>{{ reserva.location }}</p>
-        <p class="amount">{{ reserva.amount }}</p>
-        <div class="status">
-          <ion-icon name="time-outline"></ion-icon>
-          <span>Pendiente</span>
-        </div>
-      </div>
-    </div>
+    <ion-card class="card-contend">
+      <ion-row>
+        <ion-col size="12">
+          <h3 *ngIf="view === 'pending'" class="whiteLabel">
+            Reservas Pendientes
+          </h3>
+          <h3 *ngIf="view === 'upcoming'" class="whiteLabel">
+            Próximas Reservas
+          </h3>
+          <h3 *ngIf="view === 'history'" class="whiteLabel">Historial</h3>
+        </ion-col>
+      </ion-row>
 
-    <div *ngIf="view === 'upcoming'" class="proximas-reservas">
-      <div
-        class="transaction-card"
-        *ngFor="let reserva of upcomingReservations"
-      >
-        <p><strong>{{ reserva.name }}</strong></p>
-        <p>{{ reserva.date }}</p>
-        <p>{{ reserva.time }}</p>
-        <p>{{ reserva.location }}</p>
-        <p class="amount">{{ reserva.amount }}</p>
-        <div class="status">
-          <ion-icon
-            [name]="reserva.status === 'Completada' ? 'checkmark-circle-outline' : 'close-circle-outline'"
-            [style.color]="reserva.status === 'Completada' ? 'green' : 'red'"
-          ></ion-icon>
-          <span>{{ reserva.status }}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+      <ion-row *ngIf="view === 'pending'" class="reservas-pendientes">
+        <ion-col size="12" *ngIf="pendingReservations.length === 0">
+          <ion-icon name="warning-outline" class="cash-icon"></ion-icon>
+          <p class="ion-text-center">No hay reservas pendientes.</p>
+        </ion-col>
+        <ion-col
+          size="12"
+          *ngFor="let reserva of pendingReservations"
+          class="transaction-card"
+        >
+          <ion-icon name="today-outline" class="cash-icon"></ion-icon>
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-button
+              size="small"
+              shape="round"
+              color="primary"
+              (click)="acceptReservation(reserva)"
+              >Aceptar</ion-button
+            >
+            <ion-button
+              size="small"
+              shape="round"
+              color="danger"
+              (click)="rejectReservation(reserva)"
+              >Rechazar</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="view === 'upcoming'" class="proximas-reservas">
+        <ion-col size="12" *ngIf="upcomingReservations.length === 0">
+          <ion-icon name="warning-outline" class="cash-icon"></ion-icon>
+          <p class="ion-text-center">No hay próximas reservas.</p>
+        </ion-col>
+        <ion-col
+          size="12"
+          *ngFor="let reserva of upcomingReservations"
+          class="transaction-card"
+        >
+          <ion-icon name="reader-outline" class="cash-icon"></ion-icon>
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-button
+              size="small"
+              shape="round"
+              color="danger"
+              (click)="cancelReservation(reserva)"
+              >Cancelar</ion-button
+            >
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="view === 'history'" class="historial">
+        <ion-col size="12" *ngIf="historyReservations.length === 0">
+          <ion-icon name="warning-outline" class="cash-icon"></ion-icon>
+          <p class="ion-text-center">No hay reservas en el historial.</p>
+        </ion-col>
+        <ion-col
+          size="12"
+          *ngFor="let reserva of historyReservations"
+          class="transaction-card"
+        >
+          <ion-icon name="time-outline" class="cash-icon"></ion-icon>
+          <p><strong>{{ reserva.name }}</strong></p>
+          <p>{{ reserva.date }}</p>
+          <p>{{ reserva.time }}</p>
+          <p>{{ reserva.location }}</p>
+          <p class="amount">{{ reserva.amount }}</p>
+          <div>
+            <ion-icon
+              [name]="reserva.status === 'Completada' ? 'checkmark-circle-outline' : 'close-circle-outline'"
+              [style.color]="reserva.status === 'Completada' ? 'green' : 'red'"
+            ></ion-icon>
+            <span>{{ reserva.status }}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-grid>
 </ion-content>

@@ -1,19 +1,10 @@
 .balance-container {
-  padding: 16px;
   text-align: center;
 }
 
 .balance-buttons {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-.balance-summary {
-  background-color: #7e535370;
-  border-radius: 35px;
-  padding: 20px;
-  color: white;
   margin-bottom: 20px;
 }
 
@@ -40,6 +31,14 @@
   margin-bottom: 10px;
 }
 
+.transaction-card-line{
+  border-bottom: 1px solid #f9250976;
+  background-color: #786b6a31;
+  border-radius: 20px;
+  color: white;
+  margin-bottom: 10px;
+}
+
 .transaction-card p {
   margin: 5px 0;
 }
@@ -50,4 +49,18 @@
 
 .cash-icon{
   font-size: 3rem;
+}
+
+p{
+  margin: 5px;
+}
+
+.button-balance{
+  --background: #64545288;
+}
+
+.button-selected {
+  --background: #629ADF;
+  --color: #fff;
+  border-radius: 2px solid #629ADF;
 }
