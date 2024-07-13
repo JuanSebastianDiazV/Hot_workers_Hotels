@@ -13,7 +13,7 @@ export class LoginService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  login(username: string, password: string, type: string = 'U'): Observable<any> {
+  login(username: string, password: string, type: string = 'E'): Observable<any> {
     const endpoint = `${environment.urlBase}login`; // Utiliza la URL base del entorno
     const body = { username, password, type }; // Incluye el parámetro `type` en el cuerpo de la solicitud
 

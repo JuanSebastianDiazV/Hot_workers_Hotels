@@ -31,7 +31,7 @@ export class EntryFormPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      type: ['U', Validators.required], // Añadimos el campo type con valor por defecto 'U'
+      type: ['E', Validators.required], // Añadimos el campo type con valor por defecto 'U'
     });
 
     this.formService.setForm('loginForm', this.loginForm);
