@@ -1,4 +1,3 @@
-// src/app/pages/entry-form/entry-form.page.ts
 import { Component, OnInit } from '@angular/core';
 import { MenuController, LoadingController } from '@ionic/angular';
 import { AlertService } from '../../services/alerts/alerts.service';
@@ -7,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login-service.service';
 import { Router } from '@angular/router';
 import { FormService } from '../../services/form-service/formservice.service';
+
 @Component({
   selector: 'app-entry-form',
   templateUrl: './entry-form.page.html',
@@ -23,7 +23,7 @@ export class EntryFormPage implements OnInit {
     private alertService: AlertService,
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder,
-    private LoginService: LoginService, // Inyectamos el servicio
+    private loginService: LoginService, // Inyectamos el servicio
     private loadingController: LoadingController, // Inyectamos el LoadingController
     private router: Router,
     private formService: FormService
@@ -31,6 +31,7 @@ export class EntryFormPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
+      type: ['U', Validators.required], // Añadimos el campo type con valor por defecto 'U'
     });
 
     this.formService.setForm('loginForm', this.loginForm);
@@ -52,8 +53,8 @@ export class EntryFormPage implements OnInit {
     if (this.loginForm.valid) {
       await this.presentLoading(); // Mostrar loader
 
-      const { username, password } = this.loginForm.value;
-      this.LoginService.login(username, password).subscribe({
+      const { username, password, type } = this.loginForm.value; // Añadimos type
+      this.loginService.login(username, password, type).subscribe({
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
           if (response.success) {
