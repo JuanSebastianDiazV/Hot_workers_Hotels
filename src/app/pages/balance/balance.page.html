@@ -4,10 +4,12 @@
     <h1 class="ion-text-center whiteLabel">Mi balance</h1>
     <ion-row class="balance-buttons">
       <ion-col size="6" size-md="6">
-        <ion-button shape="round" expand="block" color="danger" (click)="showEarnings()"> Total Ganancias </ion-button>
+        <ion-button shape="round" expand="block" class="button-balance"
+          [ngClass]="{'button-selected': view === 'earnings'}" (click)="showEarnings()"> Total Ganancias </ion-button>
       </ion-col>
       <ion-col size="6" size-md="6">
-        <ion-button shape="round" expand="block" color="dark" (click)="showPaymentHistory()"> Historial de Pagos
+        <ion-button shape="round" expand="block" class="button-balance"
+          [ngClass]="{'button-selected': view === 'paymentHistory'}" (click)="showPaymentHistory()"> Historial de Pagos
         </ion-button>
       </ion-col>
     </ion-row>
@@ -50,7 +52,5 @@
         </ion-col>
       </ion-row>
     </ion-card>
-
-
   </ion-grid>
 </ion-content>

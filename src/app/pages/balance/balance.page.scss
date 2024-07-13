@@ -50,3 +50,17 @@
 .cash-icon{
   font-size: 3rem;
 }
+
+p{
+  margin: 5px;
+}
+
+.button-balance{
+  --background: #64545288;
+}
+
+.button-selected {
+  --background: #629ADF;
+  --color: #fff;
+  border-radius: 2px solid #629ADF;
+}
