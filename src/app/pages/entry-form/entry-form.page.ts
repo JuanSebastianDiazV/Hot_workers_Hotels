@@ -127,7 +127,9 @@ export class EntryFormPage implements OnInit {
   async presentLoading() {
     this.isLoading = true;
     const loader = await this.loadingController.create({
-      message: 'Cargando...',
+      message: 'iniciando sesión',
+      cssClass: 'custom-loader',
+      backdropDismiss: true
     });
     await loader.present();
 

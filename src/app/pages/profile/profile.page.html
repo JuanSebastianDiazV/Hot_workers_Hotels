@@ -1,6 +1,9 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
   <div class="profile-container ion-margin-top">
+    <div class="ion-text-center whiteLabel">
+      <h1>Mi perfil</h1>
+    </div>
     <div
       [ngStyle]="{'border-color': getProgressColor()}"
       class="progress-circle"
@@ -12,19 +15,39 @@
       tu perfil sea más visible.
     </p>
     <div class="buttonsProfile">
-      <ion-button expand="block" (click)="navigateTo('personal-info')"
+      <ion-button
+        shape="round"
+        expand="block"
+        type="button"
+        (click)="navigateTo('personal-info')"
         >Información Personal</ion-button
       >
-      <ion-button expand="block" (click)="navigateTo('bank-info')"
+      <ion-button
+        shape="round"
+        expand="block"
+        type="button"
+        (click)="navigateTo('bank-info')"
         >Información Bancaria</ion-button
       >
-      <ion-button expand="block" (click)="navigateTo('photos-videos')"
+      <ion-button
+        shape="round"
+        expand="block"
+        type="button"
+        (click)="navigateTo('photos-videos')"
         >Fotos y Videos</ion-button
       >
-      <ion-button expand="block" (click)="navigateTo('description')"
+      <ion-button
+        shape="round"
+        expand="block"
+        type="button"
+        (click)="navigateTo('description')"
         >Descripción</ion-button
       >
-      <ion-button expand="block" (click)="navigateTo('rates')"
+      <ion-button
+        shape="round"
+        expand="block"
+        type="button"
+        (click)="navigateTo('rates')"
         >Tarifas</ion-button
       >
     </div>
