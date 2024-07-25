@@ -94,8 +94,17 @@ const routes: Routes = [
     path: 'rates',
     loadChildren: () => import('./pages/rates/rates.module').then( m => m.RatesPageModule),
     // canActivate: [AuthGuard]
+  },
+  {
+    path: 'my-photos-and-videos',
+    loadChildren: () => import('./pages/my-photos-and-videos/my-photos-and-videos.module').then( m => m.MyPhotosAndVideosPageModule),
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'validate-your-identity',
+    loadChildren: () => import('./pages/validate-your-identity/validate-your-identity.module').then( m => m.ValidateYourIdentityPageModule),
+    // canActivate: [AuthGuard]
   }
-
 ];
  
 @NgModule({

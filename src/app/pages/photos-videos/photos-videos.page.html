@@ -1,3 +1,24 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <div class="ion-margin-top">
+    <h1 class="whiteLabel ion-text-center">Fotos Y Videos</h1>
+    <ion-card class="card-contend">
+      <ion-button
+        shape="round"
+        expand="block"
+        color="danger"
+        [routerLink]="['/my-photos-and-videos']"
+        class="ion-margin"
+        >Mis fotos y videos</ion-button
+      >
+      <ion-button
+        shape="round"
+        expand="block"
+        color="danger"
+        [routerLink]="['/validate-your-identity']"
+        class="ion-margin"
+        >Valida tu identidad</ion-button
+      >
+    </ion-card>
+  </div>
 </ion-content>
