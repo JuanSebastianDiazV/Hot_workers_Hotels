@@ -31,7 +31,7 @@ export class EntryFormPage implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      type: ['U', Validators.required], // Añadimos el campo type con valor por defecto 'U'
+      type: ['E', Validators.required], // Añadimos el campo type con valor por defecto 'U'
     });
 
     this.formService.setForm('loginForm', this.loginForm);
@@ -57,7 +57,7 @@ export class EntryFormPage implements OnInit {
       this.loginService.login(username, password, type).subscribe({
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
-          if (response.success) {
+          if (response) {
             this.menuCtrl.enable(true);
             this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);
@@ -127,7 +127,9 @@ export class EntryFormPage implements OnInit {
   async presentLoading() {
     this.isLoading = true;
     const loader = await this.loadingController.create({
-      message: 'Cargando...',
+      message: 'iniciando sesión',
+      cssClass: 'custom-loader',
+      backdropDismiss: true
     });
     await loader.present();
 
