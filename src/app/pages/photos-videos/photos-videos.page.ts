@@ -16,13 +16,13 @@ export class PhotosVideosPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.alertService.presentErrorAlert(
-      '¡Error!',
-      'Id photos failed 112125',
-      () => {
-        this.router.navigate(['/profile']);
-      }
-    );
+    // this.alertService.presentErrorAlert(
+    //   '¡Error!',
+    //   'Id photos failed 112125',
+    //   () => {
+    //     this.router.navigate(['/profile']);
+    //   }
+    // );
   }
 
 }
