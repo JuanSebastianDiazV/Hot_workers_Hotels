@@ -1,3 +1,47 @@
 <ion-content [fullscreen]="true" class="background-general-interior">
   <app-button-menu-toggle></app-button-menu-toggle>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <div class="custom-back-container" routerLink="/photos-videos">
+          <img src="assets/images/left-chevron.png" alt="Back" class="custom-back-icon" />
+        </div>
+        <h1 class="ion-text-center whiteLabel">Valida Tu Identidad</h1>
+      </ion-col>
+
+      <ion-col size="12">
+        <h2 class="ion-text-center whiteLabel">Foto Frontal de tu Cédula</h2>
+        <ion-card>
+          <img [src]="frontIdPhoto.url" *ngIf="frontIdPhoto.url" />
+          <ion-button *ngIf="!frontIdPhoto.url" (click)="selectPhotoSource('frontId')">+</ion-button>
+          <div *ngIf="frontIdPhoto.url" class="delete-button-container">
+            <ion-button (click)="removePhoto('frontId')">Eliminar</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <h2 class="ion-text-center whiteLabel">Foto Posterior de tu Cédula</h2>
+        <ion-card>
+          <img [src]="backIdPhoto.url" *ngIf="backIdPhoto.url" />
+          <ion-button *ngIf="!backIdPhoto.url" (click)="selectPhotoSource('backId')">+</ion-button>
+          <div *ngIf="backIdPhoto.url" class="delete-button-container">
+            <ion-button (click)="removePhoto('backId')">Eliminar</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12">
+        <h2 class="ion-text-center whiteLabel">Selfie con Tu Cédula</h2>
+        <ion-card>
+          <img [src]="selfiePhoto.url" *ngIf="selfiePhoto.url" />
+          <ion-button *ngIf="!selfiePhoto.url" (click)="selectPhotoSource('selfie')">+</ion-button>
+          <div *ngIf="selfiePhoto.url" class="delete-button-container">
+            <ion-button (click)="removePhoto('selfie')">Eliminar</ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-button expand="block" shape="round" color="danger" (click)="saveMedia()">Guardar</ion-button>
+  </ion-grid>
 </ion-content>
