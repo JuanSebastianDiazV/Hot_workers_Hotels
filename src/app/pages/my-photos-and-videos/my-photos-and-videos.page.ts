@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { CameraService } from './../../services/camera-service/camera.service';
+import { AlertService } from 'src/app/services/alerts/alerts.service';
 
 @Component({
   selector: 'app-my-photos-and-videos',
@@ -14,7 +15,8 @@ export class MyPhotosAndVideosPage implements OnInit {
 
   constructor(
     private cameraService: CameraService,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private alertService: AlertService
   ) {}
 
   ngOnInit() {
@@ -104,6 +106,10 @@ export class MyPhotosAndVideosPage implements OnInit {
   }
 
   saveMedia() {
+    this.alertService.presentErrorAlert(
+      'Error',
+      'Hubo un problema con el guardado de fotos.'
+    );
     this.cameraService
       .saveMedia({ photos: this.photos, videos: this.videos })
       .subscribe((response) => {
