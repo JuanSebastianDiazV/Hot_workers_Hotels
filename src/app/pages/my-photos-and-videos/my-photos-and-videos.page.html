@@ -19,11 +19,11 @@
           (click)="removePhoto(i)">Eliminar</ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="getClickedButton() == 'Worker'">
       <ion-col size="12">
         <h1 class="ion-text-center whiteLabel">Tus Videos</h1>
       </ion-col>
-      <ion-col size="6" *ngFor="let video of videos; let i = index">
+      <ion-col size="12" *ngFor="let video of videos; let i = index">
         <ion-card>
           <h1 *ngIf="!video.url">Video</h1>
           <video [src]="video.url" controls *ngIf="video.url"></video>

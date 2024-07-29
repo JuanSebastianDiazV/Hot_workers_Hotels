@@ -19,13 +19,25 @@
     <ion-row>
       <ion-col size="12">
         <div class="address-section">
-          <ion-button *ngIf="!showAddressForm" expand="block" (click)="toggleAddressForm()" color="danger">Actualizar Dirección</ion-button>
+          <ion-button
+            *ngIf="!showAddressForm"
+            expand="block"
+            (click)="toggleAddressForm()"
+            color="danger"
+            >Actualizar Dirección</ion-button
+          >
           <div *ngIf="showAddressForm" class="address-form ion-padding">
             <ion-item class="whiteLabel">
               <ion-label position="floating">Dirección</ion-label>
-              <ion-input [(ngModel)]="address" placeholder="Ingresa tu dirección"></ion-input>
+              <ion-input
+                [(ngModel)]="address"
+                placeholder="Ingresa tu dirección"
+              ></ion-input>
             </ion-item>
-            <ion-button expand="block" (click)="saveAddress()" color="danger">{{ addressSaved ? 'Actualizar Dirección' : 'Guardar Dirección' }}</ion-button>
+            <ion-button expand="block" (click)="saveAddress()" color="danger"
+              >{{ addressSaved ? 'Actualizar Dirección' : 'Guardar Dirección'
+              }}</ion-button
+            >
           </div>
         </div>
       </ion-col>
@@ -33,10 +45,22 @@
     <ion-row>
       <ion-col size="12">
         <div class="video-banner">
-          <video width="100%" height="auto" autoplay muted loop>
-            <source src="../../../assets/video/welcome.mp4" type="video/mp4">
-            Tu navegador no soporta la etiqueta de video.
-          </video>
+          <div *ngIf="getClickedButton() == 'Worker'">
+            <video width="100%" height="auto" autoplay loop>
+              <source
+                src="../../../assets/video/AppWorkers.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
+          <div *ngIf="getClickedButton() == 'Hotel'">
+            <video width="100%" height="auto" autoplay loop>
+              <source
+                src="../../../assets/video/AppHotel.mp4"
+                type="video/mp4"
+              />
+            </video>
+          </div>
         </div>
       </ion-col>
     </ion-row>

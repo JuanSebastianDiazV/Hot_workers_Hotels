@@ -3,6 +3,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { CameraService } from './../../services/camera-service/camera.service';
 import { AlertService } from 'src/app/services/alerts/alerts.service';
+import { ButtonDataService } from '../../services/button-data/button-data.service';
 
 @Component({
   selector: 'app-my-photos-and-videos',
@@ -16,7 +17,8 @@ export class MyPhotosAndVideosPage implements OnInit {
   constructor(
     private cameraService: CameraService,
     private actionSheetController: ActionSheetController,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private buttonDataService: ButtonDataService
   ) {}
 
   ngOnInit() {
@@ -115,5 +117,9 @@ export class MyPhotosAndVideosPage implements OnInit {
       .subscribe((response) => {
         console.log('Media guardada', response);
       });
+  }
+
+  getClickedButton() {
+    return this.buttonDataService.getClickedButton();
   }
 }
