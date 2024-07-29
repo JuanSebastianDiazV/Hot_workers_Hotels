@@ -27,4 +27,14 @@ export class FormService {
       }
     }
   }
+
+  // Obtiene los valores de un formulario específico
+  getFormValue(formName: string) {
+    return this.forms[formName] ? this.forms[formName].value : null;
+  }
+
+  // Elimina un formulario del registro
+  removeForm(formName: string) {
+    delete this.forms[formName];
+  }
 }

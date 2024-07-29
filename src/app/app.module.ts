@@ -9,7 +9,7 @@ import { ComponentsModule } from '../app/components/components.module';
 import { AuthInterceptor } from './services/interceptors/auth/auth.interceptor'; 
 import { AuthService } from './services/auth-service/auth.service'; 
 import { LoginService } from './services/login/login-service.service';
-import { UserRegistrationService } from './services/user-registration/user-registration.service';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +25,6 @@ import { UserRegistrationService } from './services/user-registration/user-regis
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     AuthService,
     LoginService,
-    UserRegistrationService
   ],
   bootstrap: [AppComponent],
 })

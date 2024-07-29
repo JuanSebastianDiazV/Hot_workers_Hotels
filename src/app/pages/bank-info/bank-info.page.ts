@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { AlertService } from '../../services/alerts/alerts.service';
 import { ProfileProgressService } from '../../services/profile-progress-service/profile-progress-service.service';
 import { BankService } from '../../services/bank-service/bank.service';
-import { DataService } from '../../services/data-service/data.service';
+import { FormService } from '../../services/form-service/formservice.service';
+import { EmployeeService } from '../../services/employee-service/employee.service';
 
 @Component({
   selector: 'app-bank-info',
@@ -23,7 +24,8 @@ export class BankInfoPage implements OnInit {
     private progressService: ProfileProgressService,
     private alertService: AlertService,
     private bankService: BankService,
-    private dataService: DataService
+    private formService: FormService,
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
@@ -37,6 +39,8 @@ export class BankInfoPage implements OnInit {
     this.bankService.getBanks().subscribe(banks => {
       this.banks = banks;
     });
+
+    this.formService.setForm('bankInfo', this.bankInfoForm); // Registra el formulario
 
     this.bankInfoForm.get('bank')?.valueChanges.subscribe(value => {
       this.isNequi = value.toLowerCase() === 'nequi';
@@ -58,15 +62,14 @@ export class BankInfoPage implements OnInit {
 
       const formValue = this.bankInfoForm.value;
 
-      // Crear el cuerpo del POST
-      const postData = {
-        bank: formValue.bank,
-        accountType: formValue.accountType,
-        accountNumber: this.isNequi ? formValue.phoneNumber : formValue.accountNumber
-      };
+      // Guardar los datos en el servicio de datos del formulario
+      this.formService.setForm('bankInfo', this.bankInfoForm);
 
-      // Enviar los datos al servidor usando el servicio de datos
-      this.dataService.saveBankInfo(postData).subscribe({
+      // Crear el cuerpo del POST
+      const postData = this.formService.getFormValue('bankInfo');
+
+      // Enviar los datos al servidor usando el servicio de empleados
+      this.employeeService.saveEmployeeData('bankInfo', postData).subscribe({
         next: async (response) => {
           console.log('Respuesta del servidor:', response);
           this.isSaving = false; // Restablecer la bandera de guardado
