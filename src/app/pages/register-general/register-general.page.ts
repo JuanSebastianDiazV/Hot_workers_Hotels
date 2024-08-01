@@ -60,12 +60,7 @@ export class RegisterGeneralPage implements OnInit {
         updatedAt: '0' // Valor inicial para updatedAt
       }; // Crear el objeto de datos de usuario
 
-      this.formService.setForm('registerForm', this.registerForm); // Guardar los datos en el servicio de datos del formulario
-
-      // Crear el cuerpo del POST
-      const postData = this.formService.getFormValue('registerForm');
-
-      this.employeeService.saveEmployeeData('registerForm', postData).subscribe({
+      this.employeeService.saveEmployeeData(userData).subscribe({
         next: (response) => {
           if (response) {
             this.alertService.presentSuccessAlert(

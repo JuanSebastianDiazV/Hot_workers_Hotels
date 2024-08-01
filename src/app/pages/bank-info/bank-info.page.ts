@@ -66,10 +66,14 @@ export class BankInfoPage implements OnInit {
       this.formService.setForm('bankInfo', this.bankInfoForm);
 
       // Crear el cuerpo del POST
-      const postData = this.formService.getFormValue('bankInfo');
+      const postData = {
+        bank: formValue.bank,
+        accountType: formValue.accountType,
+        accountNumber: this.isNequi ? formValue.phoneNumber : formValue.accountNumber,
+      };
 
       // Enviar los datos al servidor usando el servicio de empleados
-      this.employeeService.saveEmployeeData('bankInfo', postData).subscribe({
+      this.employeeService.saveEmployeeData(postData).subscribe({
         next: async (response) => {
           console.log('Respuesta del servidor:', response);
           this.isSaving = false; // Restablecer la bandera de guardado
