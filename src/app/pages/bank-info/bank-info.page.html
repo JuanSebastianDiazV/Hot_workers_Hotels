@@ -13,13 +13,7 @@
       <ion-item>
         <ion-label position="floating">Banco</ion-label>
         <ion-select formControlName="bank">
-          <ion-select-option value="bancolombia">Bancolombia</ion-select-option>
-          <ion-select-option value="banco_caja_social">Banco Caja Social</ion-select-option>
-          <ion-select-option value="banco_de_occidente">Banco de Occidente</ion-select-option>
-          <ion-select-option value="banco_popular">Banco Popular</ion-select-option>
-          <ion-select-option value="banco_av_villas">Banco AV Villas</ion-select-option>
-          <ion-select-option value="nequi">Nequi</ion-select-option>
-          <ion-select-option value="daviplata">Daviplata</ion-select-option>
+          <ion-select-option *ngFor="let bank of banks" [value]="bank.id">{{ bank.name }}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-text color="danger" *ngIf="bankInfoForm.get('bank')?.touched && bankInfoForm.get('bank')?.invalid">
@@ -42,19 +36,41 @@
         </p>
       </ion-text>
 
-      <ion-item>
+      <!-- Mostrar/Ocultar Número de Cuenta -->
+      <ion-item *ngIf="!isNequi">
         <ion-label position="floating">Número de Cuenta</ion-label>
-        <ion-input formControlName="accountNumber" type="text"></ion-input>
+        <ion-input formControlName="accountNumber" type="number"></ion-input>
       </ion-item>
       <ion-text color="danger"
         *ngIf="bankInfoForm.get('accountNumber')?.touched && bankInfoForm.get('accountNumber')?.invalid">
         <p *ngIf="bankInfoForm.get('accountNumber')?.errors?.['required']">
           El número de cuenta es requerido.
         </p>
+        <p *ngIf="bankInfoForm.get('accountNumber')?.errors?.['pattern']">
+          El número de cuenta debe contener solo números.
+        </p>
+      </ion-text>
+
+      <!-- Mostrar/Ocultar Número de Celular -->
+      <ion-item *ngIf="isNequi">
+        <ion-label position="floating">Número de Celular</ion-label>
+        <ion-input formControlName="phoneNumber" type="number"></ion-input>
+      </ion-item>
+      <ion-text color="danger"
+        *ngIf="bankInfoForm.get('phoneNumber')?.touched && bankInfoForm.get('phoneNumber')?.invalid">
+        <p *ngIf="bankInfoForm.get('phoneNumber')?.errors?.['required']">
+          El número de celular es requerido.
+        </p>
+        <p *ngIf="bankInfoForm.get('phoneNumber')?.errors?.['pattern']">
+          El número de celular debe tener 10 dígitos y contener solo números.
+        </p>
       </ion-text>
 
       <ion-button expand="block" shape="round" class="ion-margin-top" color="danger" type="submit"
-        [disabled]="!bankInfoForm.valid">Guardar</ion-button>
+        [disabled]="!bankInfoForm.valid || isSaving">
+        <ion-spinner *ngIf="isSaving" name="crescent"></ion-spinner>
+        <span *ngIf="!isSaving">Guardar</span>
+      </ion-button>
     </form>
   </div>
 </ion-content>

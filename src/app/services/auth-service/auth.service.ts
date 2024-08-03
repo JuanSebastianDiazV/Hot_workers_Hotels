@@ -21,4 +21,19 @@ export class AuthService {
   removeToken(): void {
     localStorage.removeItem('authToken');
   }
+
+  // Método para obtener el ID del usuario
+  getUserId(): string {
+    return localStorage.getItem('userId') || '';
+  }
+
+  // Método para guardar el ID del usuario
+  setUserId(userId: string): void {
+    localStorage.setItem('userId', userId);
+  }
+
+  // Método para eliminar el ID del usuario
+  removeUserId(): void {
+    localStorage.removeItem('userId');
+  }
 }

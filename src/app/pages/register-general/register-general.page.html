@@ -38,7 +38,10 @@
           <p>Las contraseñas no coinciden.</p>
         </ion-text>
         <div class="ion-padding">
-          <ion-button shape="round" expand="full" color="primary" type="submit" [disabled]="registerForm.invalid">Crear Usuario</ion-button>
+          <ion-button shape="round" expand="full" color="primary" type="submit" [disabled]="registerForm.invalid || isSubmitting">
+            <ion-spinner *ngIf="isSubmitting" name="crescent"></ion-spinner>
+            <span *ngIf="!isSubmitting">Crear Usuario</span>
+          </ion-button>
         </div>
       </form>
     </ion-card>

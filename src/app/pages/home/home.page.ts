@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ButtonDataService } from '../../services/button-data/button-data.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomePage implements OnInit {
   addressSaved: boolean = false;
   showAddressForm: boolean = false;
 
-  constructor() {}
+  constructor(private buttonDataService: ButtonDataService) {}
 
   ngOnInit(): void {
     this.loadAddress();
@@ -36,5 +37,9 @@ export class HomePage implements OnInit {
       this.location = storedAddress;
       this.addressSaved = true;
     }
+  }
+
+  getClickedButton() {
+    return this.buttonDataService.getClickedButton();
   }
 }

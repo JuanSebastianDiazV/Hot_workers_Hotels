@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ProfileProgressService } from '../../services/profile-progress-service/profile-progress-service.service';
+import { FormService } from '../../services/form-service/formservice.service';
+import { EmployeeService } from '../../services/employee-service/employee.service';
 
 @Component({
   selector: 'app-personal-info',
@@ -11,12 +13,15 @@ import { ProfileProgressService } from '../../services/profile-progress-service/
 })
 export class PersonalInfoPage implements OnInit {
   personalInfoForm!: FormGroup;
+  isSaving: boolean = false; // Variable para manejar el estado del guardado
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private progressService: ProfileProgressService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private formService: FormService,
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit() {
@@ -31,25 +36,47 @@ export class PersonalInfoPage implements OnInit {
       user: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
+
+    this.formService.setForm('personalInfo', this.personalInfoForm); // Registra el formulario
   }
 
   async save() {
     if (this.personalInfoForm.valid) {
-      // Lógica para guardar los datos
-      this.progressService.updateProgress('personal-info');
-      
-      // Muestra el alert de confirmación
-      const alert = await this.alertController.create({
-        header: 'Éxito',
-        message: 'Información Personal Actualizada Con Éxito',
-        buttons: ['Aceptar']
-      });
+      this.isSaving = true; // Mostrar el spinner
 
-      await alert.present();
-      
-      // Navega de vuelta al perfil después de cerrar el alert
-      alert.onDidDismiss().then(() => {
-        this.router.navigate(['/profile']);
+      const formValue = this.personalInfoForm.value;
+      const postData = {
+        ...formValue,
+      };
+
+      this.employeeService.saveEmployeeData(postData).subscribe({
+        next: async (response) => {
+          this.isSaving = false; // Ocultar el spinner
+          this.progressService.updateProgress('personal-info');
+
+          const alert = await this.alertController.create({
+            header: 'Éxito',
+            message: 'Información Personal Actualizada Con Éxito',
+            buttons: ['Aceptar']
+          });
+
+          await alert.present();
+
+          alert.onDidDismiss().then(() => {
+            this.router.navigate(['/profile']);
+          });
+        },
+        error: async (error) => {
+          console.error('Error al guardar la información personal:', error);
+          this.isSaving = false; // Ocultar el spinner
+          const alert = await this.alertController.create({
+            header: 'Error',
+            message: 'Hubo un problema al guardar la información personal. Inténtelo nuevamente.',
+            buttons: ['Aceptar']
+          });
+
+          await alert.present();
+        }
       });
     }
   }
