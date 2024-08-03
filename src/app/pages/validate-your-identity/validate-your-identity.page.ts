@@ -1,8 +1,10 @@
+
 import { AlertService } from './../../services/alerts/alerts.service';
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { CameraService } from './../../services/camera-service/camera.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-validate-your-identity',
@@ -10,6 +12,7 @@ import { CameraService } from './../../services/camera-service/camera.service';
   styleUrls: ['./validate-your-identity.page.scss'],
 })
 export class ValidateYourIdentityPage implements OnInit {
+
   frontIdPhoto: { url: string | null } = { url: null };
   backIdPhoto: { url: string | null } = { url: null };
   selfiePhoto: { url: string | null } = { url: null };
@@ -112,4 +115,12 @@ export class ValidateYourIdentityPage implements OnInit {
       console.log('Media guardada', response);
     });
   }
+
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+
 }

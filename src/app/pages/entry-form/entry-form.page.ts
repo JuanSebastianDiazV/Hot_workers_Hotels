@@ -34,6 +34,7 @@ export class EntryFormPage implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       type: ['E', Validators.required], // Añadimos type con valor por defecto 'E'
+      type: ['E', Validators.required], // Añadimos el campo type con valor por defecto 'U'
     });
 
     this.formService.setForm('loginForm', this.loginForm);
@@ -61,6 +62,7 @@ export class EntryFormPage implements OnInit {
           await this.dismissLoading(); // Ocultar loader
           if (response && response.user && response.user.id) {
             this.authService.setUserId(response.user.id); // Almacenar el ID del usuario
+          if (response) {
             this.menuCtrl.enable(true);
             this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);

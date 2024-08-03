@@ -5,6 +5,7 @@ import { MenuController } from '@ionic/angular';
 import { AlertService } from '../../services/alerts/alerts.service';
 import { EmployeeService } from '../../services/employee-service/employee.service'; // Importar el servicio
 import { FormService } from '../../services/form-service/formservice.service'; // Importar el servicio de formularios
+import { UserRegistrationService } from '../../services/user-registration/user-registration.service'; // Importar el servicio
 import * as moment from 'moment'; // Importar moment
 import 'moment-timezone'; // Importar moment-timezone
 
@@ -24,6 +25,7 @@ export class RegisterGeneralPage implements OnInit {
     private alertService: AlertService,
     private employeeService: EmployeeService, // Inyectar el servicio
     private formService: FormService // Inyectar el servicio de formularios
+    private userRegistrationService: UserRegistrationService // Inyectar el servicio
   ) {
     this.registerForm = this.formBuilder.group(
       {
@@ -50,7 +52,6 @@ export class RegisterGeneralPage implements OnInit {
   onSubmit() {
     if (this.registerForm.valid) {
       this.isSubmitting = true; // Establecer la bandera de envío
-
       const { email, username, password } = this.registerForm.value;
       const userData = { 
         email, 
@@ -61,6 +62,7 @@ export class RegisterGeneralPage implements OnInit {
       }; // Crear el objeto de datos de usuario
 
       this.employeeService.saveEmployeeData(userData).subscribe({
+      this.userRegistrationService.registerUser(userData).subscribe({
         next: (response) => {
           if (response) {
             this.alertService.presentSuccessAlert(

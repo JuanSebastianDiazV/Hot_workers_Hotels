@@ -19,6 +19,7 @@ export class MyPhotosAndVideosPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private alertService: AlertService,
     private buttonDataService: ButtonDataService
+    private actionSheetController: ActionSheetController
   ) {}
 
   ngOnInit() {
@@ -118,6 +119,7 @@ export class MyPhotosAndVideosPage implements OnInit {
         console.log('Media guardada', response);
       });
   }
+
 
   getClickedButton() {
     return this.buttonDataService.getClickedButton();
