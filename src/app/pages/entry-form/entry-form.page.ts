@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login-service.service';
 import { Router } from '@angular/router';
 import { FormService } from '../../services/form-service/formservice.service';
+import { AuthService } from '../../services/auth-service/auth.service'; // Importar el servicio de autenticación
 
 @Component({
   selector: 'app-entry-form',
@@ -26,12 +27,13 @@ export class EntryFormPage implements OnInit {
     private loginService: LoginService, // Inyectamos el servicio
     private loadingController: LoadingController, // Inyectamos el LoadingController
     private router: Router,
-    private formService: FormService
+    private formService: FormService,
+    private authService: AuthService // Inyectar el servicio de autenticación
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      type: ['E', Validators.required], // Añadimos el campo type con valor por defecto 'U'
+      type: ['E', Validators.required], // Añadimos type con valor por defecto 'E'
     });
 
     this.formService.setForm('loginForm', this.loginForm);
@@ -57,7 +59,8 @@ export class EntryFormPage implements OnInit {
       this.loginService.login(username, password, type).subscribe({
         next: async (response) => {
           await this.dismissLoading(); // Ocultar loader
-          if (response) {
+          if (response && response.user && response.user.id) {
+            this.authService.setUserId(response.user.id); // Almacenar el ID del usuario
             this.menuCtrl.enable(true);
             this.router.navigate(['/home']);
             console.log('Login exitoso', response.user);

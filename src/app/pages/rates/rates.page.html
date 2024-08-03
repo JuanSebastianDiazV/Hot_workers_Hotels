@@ -50,7 +50,10 @@
         <p *ngIf="ratesForm.get('dayRate')?.errors?.['required']">La tarifa por día es requerida.</p>
       </ion-text>
 
-      <ion-button shape="round" color="danger" class="ion-margin-top" expand="block" type="submit" [disabled]="!ratesForm.valid">Guardar</ion-button>
+      <ion-button shape="round" color="danger" class="ion-margin-top" expand="block" type="submit" [disabled]="!ratesForm.valid || isSaving">
+        <ion-spinner *ngIf="isSaving" name="crescent"></ion-spinner>
+        <span *ngIf="!isSaving">Guardar</span>
+      </ion-button>
     </form>
   </div>
 </ion-content>
