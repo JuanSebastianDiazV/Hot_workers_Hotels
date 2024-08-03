@@ -33,6 +33,28 @@ export class RatesPage implements OnInit {
       overnight: ['', Validators.required],
       dayRate: ['', Validators.required]
     });
+
+    this.initializeValueChanges();
+  }
+
+  initializeValueChanges() {
+    Object.keys(this.ratesForm.controls).forEach(key => {
+      this.ratesForm.get(key)?.valueChanges.subscribe(value => {
+        if (value) {
+          const formattedValue = this.formatValue(value);
+          if (formattedValue !== value) {
+            this.ratesForm.get(key)?.setValue(formattedValue, { emitEvent: false });
+          }
+        }
+      });
+    });
+  }
+
+  formatValue(value: any): string {
+    // Remover caracteres que no sean dígitos
+    const numericValue = value.replace(/\D/g, '');
+    // Formatear con separadores de miles
+    return parseFloat(numericValue).toLocaleString('es-CO', { minimumFractionDigits: 0 });
   }
 
   save() {
@@ -48,14 +70,15 @@ export class RatesPage implements OnInit {
       }
 
       const postData = {
-        cost: formValue.thirtyMinutes,
-        cost1: formValue.oneHour,
-        cost2: formValue.threeHours,
-        cost3: formValue.overnight,
-        cost4: formValue.dayRate,
+        cost: formValue.thirtyMinutes.replace(/,/g, ''),
+        cost1: formValue.oneHour.replace(/,/g, ''),
+        cost2: formValue.threeHours.replace(/,/g, ''),
+        cost3: formValue.overnight.replace(/,/g, ''),
+        cost4: formValue.dayRate.replace(/,/g, ''),
         updatedAt: moment().toISOString() // Fecha actual
       };
-
+      
+      
       this.timeItemsService.updateTimeItem(timeItemId, postData).subscribe({
         next: async (response) => {
           this.isSaving = false; // Ocultar el spinner
