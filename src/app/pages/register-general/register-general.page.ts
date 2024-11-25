@@ -24,7 +24,7 @@ export class RegisterGeneralPage implements OnInit {
     private menuCtrl: MenuController,
     private alertService: AlertService,
     private employeeService: EmployeeService, // Inyectar el servicio
-    private formService: FormService // Inyectar el servicio de formularios
+    private formService: FormService, // Inyectar el servicio de formularios
     private userRegistrationService: UserRegistrationService // Inyectar el servicio
   ) {
     this.registerForm = this.formBuilder.group(
@@ -34,7 +34,7 @@ export class RegisterGeneralPage implements OnInit {
         password: ['', [Validators.required, Validators.minLength(4)]],
         confirmPassword: ['', [Validators.required]],
       },
-      { validator: this.checkPasswords }
+      { validators: this.checkPasswords.bind(this) } // Asocia correctamente la función
     );
   }
 
@@ -53,42 +53,54 @@ export class RegisterGeneralPage implements OnInit {
     if (this.registerForm.valid) {
       this.isSubmitting = true; // Establecer la bandera de envío
       const { email, username, password } = this.registerForm.value;
-      const userData = { 
-        email, 
-        username, 
-        password, 
+      const userData = {
+        email,
+        username,
+        password,
         createdAt: moment().tz('America/New_York').toISOString(), // Ajustar la hora a la zona horaria deseada
-        updatedAt: '0' // Valor inicial para updatedAt
-      }; // Crear el objeto de datos de usuario
+        updatedAt: '0', // Valor inicial para updatedAt
+      };
 
+      // Llamadas a servicios en paralelo
       this.employeeService.saveEmployeeData(userData).subscribe({
-      this.userRegistrationService.registerUser(userData).subscribe({
-        next: (response) => {
-          if (response) {
-            this.alertService.presentSuccessAlert(
-              '¡Usuario Creado Con Éxito!',
-              'Tu usuario ha sido creado con éxito. Por favor, inicia sesión.',
-              () => {
-                this.registerForm.reset();
-                this.router.navigate(['/entry-form']);
+        next: () => {
+          this.userRegistrationService.registerUser(userData).subscribe({
+            next: (response) => {
+              if (response) {
+                this.alertService.presentSuccessAlert(
+                  '¡Usuario Creado Con Éxito!',
+                  'Tu usuario ha sido creado con éxito. Por favor, inicia sesión.',
+                  () => {
+                    this.registerForm.reset();
+                    this.router.navigate(['/entry-form']);
+                  }
+                );
+              } else {
+                this.alertService.presentErrorAlert(
+                  'Error',
+                  'Hubo un problema creando el usuario. Inténtelo nuevamente.'
+                );
               }
-            );
-          } else {
-            this.alertService.presentErrorAlert(
-              'Error',
-              'Hubo un problema creando el usuario. Inténtelo nuevamente.'
-            );
-          }
-          this.isSubmitting = false; // Restablecer la bandera de envío
+              this.isSubmitting = false; // Restablecer la bandera de envío
+            },
+            error: (error) => {
+              console.error('Error creando el usuario:', error);
+              this.alertService.presentErrorAlert(
+                'Error',
+                'Hubo un problema con la solicitud.'
+              );
+              this.isSubmitting = false; // Restablecer la bandera de envío
+            },
+          });
         },
         error: (error) => {
-          console.error('Error creando el usuario:', error);
+          console.error('Error guardando los datos del empleado:', error);
           this.alertService.presentErrorAlert(
             'Error',
-            'Hubo un problema con la solicitud.'
+            'No se pudo guardar los datos del empleado.'
           );
           this.isSubmitting = false; // Restablecer la bandera de envío
-        }
+        },
       });
     } else {
       this.alertService.presentErrorAlert(

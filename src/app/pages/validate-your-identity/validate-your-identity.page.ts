@@ -1,17 +1,17 @@
 
 import { AlertService } from './../../services/alerts/alerts.service';
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { ActionSheetController } from '@ionic/angular';
 import { CameraService } from './../../services/camera-service/camera.service';
-import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-validate-your-identity',
   templateUrl: './validate-your-identity.page.html',
   styleUrls: ['./validate-your-identity.page.scss'],
 })
-export class ValidateYourIdentityPage implements OnInit {
+export class ValidateYourIdentityPage{
 
   frontIdPhoto: { url: string | null } = { url: null };
   backIdPhoto: { url: string | null } = { url: null };
@@ -21,10 +21,7 @@ export class ValidateYourIdentityPage implements OnInit {
     private cameraService: CameraService,
     private actionSheetController: ActionSheetController,
     private alertService: AlertService
-    
   ) {}
-
-  ngOnInit() {}
 
   async selectPhotoSource(photoType: string) {
     const actionSheet = await this.actionSheetController.create({
@@ -115,12 +112,4 @@ export class ValidateYourIdentityPage implements OnInit {
       console.log('Media guardada', response);
     });
   }
-
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-
 }

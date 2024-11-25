@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login/login-service.service';
 import { Router } from '@angular/router';
 import { FormService } from '../../services/form-service/formservice.service';
-import { AuthService } from '../../services/auth-service/auth.service'; // Importar el servicio de autenticación
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-entry-form',
@@ -17,24 +17,23 @@ export class EntryFormPage implements OnInit {
   loginForm!: FormGroup;
   recuperarUsuarioForm!: FormGroup;
   showLoginForm: boolean = true;
-  isLoading: boolean = false; // Variable para controlar el loader
+  isLoading: boolean = false;
 
   constructor(
     private menuCtrl: MenuController,
     private alertService: AlertService,
     private buttonDataService: ButtonDataService,
     private formBuilder: FormBuilder,
-    private loginService: LoginService, // Inyectamos el servicio
-    private loadingController: LoadingController, // Inyectamos el LoadingController
+    private loginService: LoginService,
+    private loadingController: LoadingController,
     private router: Router,
     private formService: FormService,
-    private authService: AuthService // Inyectar el servicio de autenticación
+    private authService: AuthService
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      type: ['E', Validators.required], // Añadimos type con valor por defecto 'E'
-      type: ['E', Validators.required], // Añadimos el campo type con valor por defecto 'U'
+      type: ['E', Validators.required], // Valor único
     });
 
     this.formService.setForm('loginForm', this.loginForm);
@@ -54,35 +53,39 @@ export class EntryFormPage implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      await this.presentLoading(); // Mostrar loader
+      await this.presentLoading();
 
-      const { username, password, type } = this.loginForm.value; // Añadimos type
-      this.loginService.login(username, password, type).subscribe({
-        next: async (response) => {
-          await this.dismissLoading(); // Ocultar loader
-          if (response && response.user && response.user.id) {
-            this.authService.setUserId(response.user.id); // Almacenar el ID del usuario
-          if (response) {
-            this.menuCtrl.enable(true);
-            this.router.navigate(['/home']);
-            console.log('Login exitoso', response.user);
-          } else {
-            console.log('Login fallido');
-            await this.alertService.presentErrorAlert(
-              'Error',
-              response.message
-            );
-          }
-        },
-        error: async (error) => {
-          console.error('Error en el inicio de sesión:', error);
-          await this.dismissLoading(); // Ocultar loader
+      const { username, password, type } = this.loginForm.value;
+
+      try {
+        const response = await this.loginService.login(username, password, type).toPromise();
+
+        if (response && response.user && response.user.id) {
+          this.authService.setUserId(response.user.id);
+          this.menuCtrl.enable(true);
+          this.router.navigate(['/home']);
+          console.log('Login exitoso', response.user);
+        } else {
+          console.log('Login fallido');
           await this.alertService.presentErrorAlert(
             'Error',
-            'Hubo un problema con el inicio de sesión.'
+            response?.message || 'Login fallido.'
           );
-        },
-      });
+        }
+      } catch (error) {
+        console.error('Error en el inicio de sesión:', error);
+        await this.alertService.presentErrorAlert(
+          'Error',
+          'Hubo un problema con el inicio de sesión.'
+        );
+      } finally {
+        await this.dismissLoading();
+      }
+    } else {
+      await this.alertService.presentErrorAlert(
+        'Advertencia',
+        'Por favor, complete todos los campos del formulario.'
+      );
     }
   }
 
@@ -102,9 +105,9 @@ export class EntryFormPage implements OnInit {
 
   async onSubmitRecuperacion() {
     if (this.recuperarUsuarioForm.valid) {
-      console.log(this.recuperarUsuarioForm.value);
+      console.log('Formulario válido:', this.recuperarUsuarioForm.value);
 
-      this.alertService.presentWarningAlert(
+      await this.alertService.presentWarningAlert(
         '¡Solicitud enviada!',
         'Estimado usuario, a tu correo registrado hemos enviado tu usuario.',
         () => {
@@ -114,7 +117,7 @@ export class EntryFormPage implements OnInit {
         }
       );
     } else {
-      this.alertService.presentErrorAlert(
+      await this.alertService.presentErrorAlert(
         'Advertencia',
         'Por favor, ingrese un correo válido.'
       );
@@ -132,9 +135,9 @@ export class EntryFormPage implements OnInit {
   async presentLoading() {
     this.isLoading = true;
     const loader = await this.loadingController.create({
-      message: 'iniciando sesión',
+      message: 'Iniciando sesión...',
       cssClass: 'custom-loader',
-      backdropDismiss: true
+      backdropDismiss: true,
     });
     await loader.present();
 
@@ -148,7 +151,7 @@ export class EntryFormPage implements OnInit {
       this.isLoading = false;
       return await this.loadingController.dismiss().catch(() => {});
     } else {
-      return Promise.resolve(); // Aseguramos que siempre se retorna una promesa
+      return Promise.resolve();
     }
   }
 }

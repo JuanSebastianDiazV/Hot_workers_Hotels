@@ -19,7 +19,6 @@ export class MyPhotosAndVideosPage implements OnInit {
     private actionSheetController: ActionSheetController,
     private alertService: AlertService,
     private buttonDataService: ButtonDataService
-    private actionSheetController: ActionSheetController
   ) {}
 
   ngOnInit() {

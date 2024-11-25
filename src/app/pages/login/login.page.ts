@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MenuController, ModalController } from '@ionic/angular';
 import { ModalTermsPage } from '../modal-terms/modal-terms.page';
 import {
-  Validators,
   FormBuilder,
   FormGroup,
   FormControl,

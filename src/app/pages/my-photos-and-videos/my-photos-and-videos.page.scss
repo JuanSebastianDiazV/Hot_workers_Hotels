@@ -5,10 +5,6 @@ ion-header {
       color: white;
     }
   }
-  
-  ion-content {
-    --background: #1a1a1a;
-  }
 
   ion-title {
     text-align: center;
@@ -52,3 +48,14 @@ ion-header {
     --padding-end: 15px;
     font-size: 18px;
   }
+
+
+  .custom-back-container {
+    pointer-events: auto; /* Asegura que el contenedor sea clickeable */
+    z-index: 1; /* Asegura que esté encima de otros elementos si es necesario */
+  }
+  
+  .custom-back-icon {
+    cursor: pointer; /* Cambia el cursor a mano cuando el usuario pase sobre el ícono */
+  }
+  
