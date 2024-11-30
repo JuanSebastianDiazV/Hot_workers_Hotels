@@ -11,7 +11,7 @@ export class UserRegistrationService {
   constructor(private http: HttpClient) {}
 
   registerUser(userData: any): Observable<any> {
-    const endpoint = `${environment.urlBase}api/Employees`; // Utiliza la URL base del entorno
+    const endpoint = `${environment.urlBase}api/employees`; // Utiliza la URL base del entorno
     return this.http.post(endpoint, userData);
   }
 }
