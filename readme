@@ -1,0 +1,11 @@
+Generacion Android App Bundle
+
+1. npm install @capacitor/core @capacitor/cli
+2. npx cap init
+3. npm install capacitor-assets
+4. npx capacitor-assets generate --android
+5. npm run build
+6. npx cap sync android
+7. npx cap add android
+8. npx cap open android
+
