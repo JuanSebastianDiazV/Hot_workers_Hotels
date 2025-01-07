@@ -13,8 +13,7 @@ export class EmployeeService {
 
   saveEmployeeData(data: any): Observable<any> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json', // Tipo de contenido
-      'X-Origin': environment.origin, // Encabezado personalizado simulando el "Origin"
+      'Content-Type': 'application/json',
     });
 
     return this.http.post(this.apiUrl, data, { headers });
